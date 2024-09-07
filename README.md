@@ -1,5 +1,5 @@
-# a-tu-mesa
-Proyecto para hacer reservas de un restaurante
+# **A tu mesa**
+# Proyecto para hacer reservas de un restaurante
 ## Stack
 - Django
 - Python
