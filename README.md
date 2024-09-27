@@ -2,7 +2,7 @@
 # Proyecto para hacer reservas de un restaurante
 ## Stack
 - Django
-- Python
+- [Python](https://www.python.org/)
 
 ## Integrantes:
 - Cecilia
