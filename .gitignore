@@ -1,1 +1,4 @@
 /entorno-a-tu-mesa
+__pycache__/
+
+db.sqlite3
