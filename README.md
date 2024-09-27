@@ -41,3 +41,7 @@ Ahora sería activar el entorno virtual.
 ```
 .\entorno-a-tu-mesa\Scripts\activate
 ```
+## Dependencias
+```sh
+pip install -r requirements.txt
+```
