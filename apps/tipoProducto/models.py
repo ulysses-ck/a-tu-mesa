@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class TipoDePedido(models.Model):
+class TipoProducto(models.Model):
     nombre = models.CharField(max_length=25)
     
     def _str_(self):

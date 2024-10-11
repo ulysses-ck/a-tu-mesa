@@ -52,6 +52,7 @@ LOCAL_APPS = [
     'apps.ticket',
     'apps.tipoDePedido',
     'apps.usuario',
+    'apps.tipoProducto'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS

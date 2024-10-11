@@ -4,7 +4,7 @@ from django.db import models
 class Producto (models.Model):
 	precio = models.FloatField()
 	nombre = models.CharField(max_length=50)
-	tipo = models.ForeignKey("TipoProducto", on_delete=models.CASCADE)
+	tipo = models.ForeignKey("tipoProducto.TipoProducto", on_delete=models.CASCADE)
 	
 class TipoProducto (models.Model):
 	nombre = models.CharField(max_length=50)

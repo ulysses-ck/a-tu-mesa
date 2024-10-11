@@ -4,4 +4,4 @@ from django.db import models
 class Usuario (models.Model):
     persona = models.ForeignKey("persona.Persona", on_delete=models.CASCADE)
     contraseña = models.CharField(max_length=25)
-    
+
