@@ -40,18 +40,18 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    'caja',
-    'comanda',
-    'estado',
-    'factura',
-    'mesa',
-    'pedidoTotal',
-    'persona',
-    'producto',
-    'promociones',
-    'rol',
-    'ticket',
-    'tipoDePedido',
+    'apps.caja',
+    'apps.comanda',
+    'apps.estado',
+    'apps.factura',
+    'apps.mesa',
+    'apps.pedidoTotal',
+    'apps.persona',
+    'apps.producto',
+    'apps.promociones',
+    'apps.rol',
+    'apps.ticket',
+    'apps.tipoDePedido',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
