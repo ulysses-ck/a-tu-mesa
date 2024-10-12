@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import TipoDePedido
 
-# Register your models here.
+@admin.register(TipoDePedido)
+class TipoDePedidoAdmin(admin.ModelAdmin):
+    list_display = ('nombre')
