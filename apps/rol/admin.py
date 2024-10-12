@@ -3,4 +3,4 @@ from apps.rol.models import Rol
 
 @admin.register(Rol)
 class RolAdmin(admin.ModelAdmin):
-    list_display = ('nombre')
+    list_display = ('nombre',)
