@@ -63,6 +63,12 @@
         .cta-button:hover {
             background-color: #0056b3;
         }
+        .card {
+          border-radius: 10px;
+          padding: 1em;
+          margin-bottom: 1em;
+          border: 1px solid #ccc;
+        }
     </style>
   </head>
   <body>
@@ -73,7 +79,13 @@
     <div class="container">
         <h2>Gestiona tu Restaurante con Facilidad</h2>
         <p>AtuMesa proporciona herramientas potentes para optimizar las operaciones de tu restaurante.</p>
-        
+
+        {% for producto in productos %}
+            <div class="card">
+                <h3>{{ producto.nombre }}</h3>
+                <p>{{ producto.precio }}</p>
+            </div>
+        {% endfor %}
         <div class="features">
             <div class="feature">
                 <img src="https://placehold.co/400x300/ffc107/ffffff?text=Gestión+de+Menú" alt="Gestión de Menú">
