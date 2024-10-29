@@ -5,4 +5,4 @@ from apps.factura.models import Factura
 
 @admin.register(Factura)
 class FacturaAdmin(admin.ModelAdmin):
-	list_display = ('pago', 'id_ticket')
+	list_display = ('pago', 'ticket')

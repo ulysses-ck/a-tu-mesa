@@ -6,12 +6,12 @@ from apps.comanda.models import Comanda
 @admin.register(Comanda)
 class ComandaAdmin(admin.ModelAdmin):
 	list_display = (
-		'id_producto',
+		'producto',
 		'cantidad',
-		'id_estado',
-		'id_tipo_de_pedido',
-		'id_ticket',
-		'id_mesa',
+		'estado',
+		'tipo_de_pedido',
+		'ticket',
+		'mesa',
 		'fecha'
 	)
 
