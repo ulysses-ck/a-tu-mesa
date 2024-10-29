@@ -6,6 +6,6 @@ class Comanda (models.Model):
 		cantidad = models.IntegerField()
 		estado = models.ForeignKey("estado.Estado", on_delete=models.CASCADE)
 		tipo_de_pedido = models.ForeignKey("tipoDePedido.TipoDePedido", on_delete=models.CASCADE)
-		ticket = models.ForeignKey("ticket.Ticket", on_delete=models.CASCADE, null=True)
+		ticket = models.ForeignKey("ticket.Ticket", on_delete=models.CASCADE, null=True, blank=True)
 		mesa = models.ForeignKey("mesa.Mesa", on_delete=models.CASCADE)
 		fecha = models.DateTimeField()
