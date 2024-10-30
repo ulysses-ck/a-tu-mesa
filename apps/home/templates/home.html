@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AtuMesa - Bienvenido</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-image: url('https://placehold.co/1200x400/007bff/ffffff?text=Bienvenido+a+AtuMesa');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2em;
+        }
+        .feature {
+            flex-basis: 30%;
+            text-align: center;
+        }
+        .feature img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1em;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 3em;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 1em 2em;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        .card {
+          border-radius: 10px;
+          padding: 1em;
+          margin-bottom: 1em;
+          border: 1px solid #ccc;
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+        <h1></h1>
+    </header>
+    
+    <div class="container">
+        <h2>Gestiona tu Restaurante con Facilidad</h2>
+        <p>AtuMesa proporciona herramientas potentes para optimizar las operaciones de tu restaurante.</p>
+
+        {% for producto in productos %}
+            <div class="card">
+                <h3>{{ producto.nombre }}</h3>
+                <p>{{ producto.precio }}</p>
+            </div>
+        {% endfor %}
+        <div class="features">
+            <div class="feature">
+                <img src="https://placehold.co/400x300/ffc107/ffffff?text=Gestión+de+Menú" alt="Gestión de Menú">
+                <h3>Gestión de Menú</h3>
+                <p>Actualiza y organiza fácilmente los elementos de tu menú.</p>
+            </div>
+            <div class="feature">
+                <img src="https://placehold.co/400x300/28a745/ffffff?text=Reservas+de+Mesas" alt="Reservas de Mesas">
+                <h3>Reservas de Mesas</h3>
+                <p>Gestiona las reservas y optimiza la distribución de asientos.</p>
+            </div>
+            <div class="feature">
+                <img src="https://placehold.co/400x300/dc3545/ffffff?text=Seguimiento+de+Pedidos" alt="Seguimiento de Pedidos">
+                <h3>Seguimiento de Pedidos</h3>
+                <p>Mantén un registro de los pedidos desde su realización hasta la entrega.</p>
+            </div>
+        </div>
+        
+        <div class="cta">
+            <a href="#" class="cta-button">Comenzar</a>
+        </div>
+    </div>
+  </body>
+</html>

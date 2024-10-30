@@ -57,7 +57,8 @@ LOCAL_APPS = [
     'apps.ticket',
     'apps.tipoDePedido',
     'apps.usuario',
-    'apps.tipoProducto'
+    'apps.tipoProducto',
+    'apps.home'
 ]
 
 INSTALLED_APPS = CUSTOME_APPS + DJANGO_APPS + LOCAL_APPS
