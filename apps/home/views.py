@@ -3,13 +3,14 @@ from .models import Home
 
 class HomeView(TemplateView):
 	name = 'home'
-
-	urls = Home.objects.all()
 	template_name = 'home.html'
 
 	# render name in template
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['name'] = self.name
-		context['urls'] = self.urls
+		home_instance = Home.objects.first()
+		context['banner'] = home_instance.banner
+		context['botonmenu'] = home_instance.botonMenu
+		context['botonreservacion'] = home_instance.botonReservation
+		context['botonseguimientodepedido'] = home_instance.botonSeguimientoDePedido
 		return context

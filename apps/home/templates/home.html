@@ -14,7 +14,6 @@
             color: #333;
         }
         header {
-            background-image: url('https://placehold.co/1200x400/007bff/ffffff?text=Bienvenido+a+AtuMesa');
             background-size: cover;
             background-position: center;
             height: 400px;
@@ -72,8 +71,8 @@
     </style>
   </head>
   <body>
-    <header>
-        <h1></h1>
+    <header style="background-image: url('{{ banner }}');">
+        <h1>Al fin cargò esta mierda</h1>
     </header>
     
     <div class="container">
@@ -88,17 +87,17 @@
         {% endfor %}-->
         <div class="features">
             <div class="feature">
-                <img src="https://placehold.co/400x300/ffc107/ffffff?text=Gestión+de+Menú" alt="Gestión de Menú">
+                <img src="{{ botonmenu }}" alt="Gestión de Menú">
                 <h3>Gestión de Menú</h3>
                 <p>Actualiza y organiza fácilmente los elementos de tu menú.</p>
             </div>
             <div class="feature">
-                <img src="https://placehold.co/400x300/28a745/ffffff?text=Reservas+de+Mesas" alt="Reservas de Mesas">
+                <img src="{{ botonreservacion }}" alt="Reservas de Mesas">
                 <h3>Reservas de Mesas</h3>
                 <p>Gestiona las reservas y optimiza la distribución de asientos.</p>
             </div>
             <div class="feature">
-                <img src="https://placehold.co/400x300/dc3545/ffffff?text=Seguimiento+de+Pedidos" alt="Seguimiento de Pedidos">
+                <img src="{{ botonseguimientodepedido }}" alt="Seguimiento de Pedidos">
                 <h3>Seguimiento de Pedidos</h3>
                 <p>Mantén un registro de los pedidos desde su realización hasta la entrega.</p>
             </div>
