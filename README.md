@@ -1,4 +1,4 @@
-# **A tu mesa**
+# **A tu mesa - Proyecto Tecnicatura Backend**
 # Proyecto para hacer reservas de un restaurante
 ## Stack
 - Django
