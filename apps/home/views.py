@@ -14,11 +14,11 @@ class HomeView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		home_instance = Home.objects.first()
-		context['banner'] = home_instance.banner
-		context['botonmenu'] = home_instance.botonMenu
-		context['botonreservacion'] = home_instance.botonReservation
-		context['botonseguimientodepedido'] = home_instance.botonSeguimientoDePedido
-
+		if home_instance:
+			context['banner'] = home_instance.banner
+			context['botonmenu'] = home_instance.botonMenu
+			context['botonreservacion'] = home_instance.botonReservation
+			context['botonseguimientodepedido'] = home_instance.botonSeguimientoDePedido
 		return context
 
 @method_decorator(xframe_options_exempt, name='dispatch')
@@ -29,26 +29,25 @@ class HomeEditView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         home = Home.objects.first()
-        context['banner'] = home.banner
-        context['botonmenu'] = home.botonMenu
-        context['botonreservacion'] = home.botonReservation
-        context['botonseguimientodepedido'] = home.botonSeguimientoDePedido
+        if home:
+            context['banner'] = home.banner
+            context['botonmenu'] = home.botonMenu
+            context['botonreservacion'] = home.botonReservation
+            context['botonseguimientodepedido'] = home.botonSeguimientoDePedido
         return context
 
     def post(self, request, *args, **kwargs):
         home = Home.objects.first()
-        context = self.get_context_data(**kwargs)
-
         if not home:
             home = Home.objects.create()
 
-        if request.method == 'POST':
-            home.banner = request.POST.get('banner', '')
-            home.botonmenu = request.POST.get('botonmenu', '')
-            home.botonreservacion = request.POST.get('botonreservacion', '')
-            home.botonseguimientodepedido = request.POST.get('botonseguimientodepedido', '')
-            
+        # Actualizar usando los nombres correctos del modelo
+        home.banner = request.POST.get('banner', '')
+        home.botonMenu = request.POST.get('botonmenu', '')  # Notar la M mayúscula
+        home.botonReservation = request.POST.get('botonreservacion', '')  # Notar la R mayúscula
+        home.botonSeguimientoDePedido = request.POST.get('botonseguimientodepedido', '')  # Notar las mayúsculas
+        
         home.save()
         messages.success(request, 'Contenido actualizado exitosamente')
-        return redirect('edit_home')
+        return self.render_to_response(self.get_context_data(**kwargs))
 
