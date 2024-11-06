@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Home
 from django.contrib import messages
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.utils.decorators import method_decorator
 
+@method_decorator(xframe_options_exempt, name='dispatch')
 class HomeView(TemplateView):
 	name = 'home'
 	template_name = 'home.html'
@@ -18,7 +21,7 @@ class HomeView(TemplateView):
 
 		return context
 
-
+@method_decorator(xframe_options_exempt, name='dispatch')
 class HomeEditView(TemplateView):
     name = 'edit_home'
     template_name = 'home_edit.html'
