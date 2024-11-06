@@ -39,7 +39,7 @@ Ahora sería activar el entorno virtual.
 ```
 ### Linux
 ```
-.\entorno-a-tu-mesa\Scripts\activate
+source ./entorno-a-tu-mesa/bin/activate
 ```
 ## Dependencias
 ```sh
