@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Editar Contenido Principal</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label">URL Banner Principal</label>
+                                <input type="text" name="banner" class="form-control" 
+                                    value="{{ banner }}"
+                                    placeholder="Ingrese URL del banner">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">URL Botón Menú</label>
+                                <input type="text" name="botonmenu" class="form-control" 
+                                    value="{{ botonmenu }}"
+                                    placeholder="Ingrese URL del botón menú">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">URL Botón Reservación</label>
+                                <input type="text" name="botonreservacion" class="form-control" 
+                                    value="{{ botonreservacion }}"
+                                    placeholder="Ingrese URL del botón reservación">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">URL Botón Seguimiento de Pedido</label>
+                                <input type="text" name="botonseguimientodepedido" class="form-control" 
+                                    value="{{ botonseguimientodepedido }}"
+                                    placeholder="Ingrese URL del botón seguimiento">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
