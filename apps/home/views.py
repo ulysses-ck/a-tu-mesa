@@ -13,7 +13,15 @@ class HomeView(TemplateView):
 	# render name in template
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		home_instance = Home.objects.first()
+		home_instance, created = Home.objects.get_or_create(
+            id= 1,
+            defaults={
+                "banner": "https://i.ibb.co/wWdxVVs/ilustracion-delicioso-shoyu-ramen-vista-arriba-fondo-blanco-435599-30529.jpg",
+                "botonmenu":"https://cdn.pixabay.com/photo/2017/11/07/07/06/menu-2925825_1280.png",
+                "botonreservacion":"https://w7.pngwing.com/pngs/629/948/png-transparent-red-round-book-now-button-book-now-buttons-thumbnail.png",
+                "botonseguimientodepedido":"https://as2.ftcdn.net/v2/jpg/00/16/27/39/1000_F_16273947_3TlCeyAVBlJuphSPEDmllmLUeyAAQezK.jpg"
+            }
+        )
 		if home_instance:
 			context['banner'] = home_instance.banner
 			context['botonmenu'] = home_instance.botonMenu
