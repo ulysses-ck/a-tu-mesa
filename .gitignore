@@ -1,4 +1,11 @@
-/entorno-a-tu-mesa
+# Byte-compiled / optimized / DLL files
 __pycache__/
 
+# venv
+/entorno-a-tu-mesa
+
+# SQLite database file
 db.sqlite3
+
+# media
+media/
