@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from django.contrib.auth import authenticate, login
 from .models import Home
 from django.contrib import messages
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -42,7 +43,6 @@ class HomeEditView(TemplateView):
             context['botonmenu'] = home.botonMenu
             context['botonreservacion'] = home.botonReservation
             context['botonseguimientodepedido'] = home.botonSeguimientoDePedido
-            self.template_name = f'{kwargs.get("template_name")}.html'
 
         return context
 
@@ -83,3 +83,21 @@ class HomeAbout(TemplateView):
 			context['botonreservacion'] = home_instance.botonReservation
 			context['botonseguimientodepedido'] = home_instance.botonSeguimientoDePedido
 		return context
+
+@method_decorator(xframe_options_exempt, name='dispatch')
+class LoginView(TemplateView):
+    name = 'login'
+    template_name = 'login.html'
+
+    def index_view(request):
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home:index')
+        else:
+            messages.error(request, 'Invalid credentials')
+        return render(request, 'home/index.html')

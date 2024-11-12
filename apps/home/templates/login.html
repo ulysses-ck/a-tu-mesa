@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .split-screen {
+            display: flex;
+            height: 100vh;
+        }
+        .edit-panel {
+            width: 40%;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .preview-panel {
+            width: 60%;
+            height: 100vh;
+            border: none;
+        }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="split-screen">
+        <!-- Panel de Edición -->
+        <div class="edit-panel">
+            <div class="sticky-header">
+                <h3 class="mb-3">Editar Contenido Principal</h3>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" id="editForm">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label">UserName</label>
+                            <input type="text" name="banner" class="form-control preview-update" 
+                                value="{{ banner }}"
+                                data-preview-target="banner-preview"
+                                placeholder="Ingrese nombre de Usuario">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="text" name="botonmenu" class="form-control preview-update" 
+                                value="{{ botonmenu }}"
+                                data-preview-target="menu-preview"
+                                placeholder="Ingrese contraseña">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                            <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de Vista Previa -->
+        <iframe src="/" class="preview-panel" id="previewFrame"></iframe>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Actualización en tiempo real de la vista previa
+        document.querySelectorAll('.preview-update').forEach(input => {
+            input.addEventListener('input', function() {
+                const previewFrame = document.getElementById('previewFrame');
+                const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                const targetId = this.getAttribute('data-preview-target');
+                const targetElement = previewDoc.getElementById(targetId);
+                
+                if (targetElement) {
+                    if (targetElement.tagName === 'IMG') {
+                        targetElement.src = this.value;
+                    } else {
+                        targetElement.style.backgroundImage = `url(${this.value})`;
+                    }
+                }
+            });
+        });
+
+        // Recargar el iframe después de enviar el formulario
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            }).then(() => {
+                document.getElementById('previewFrame').contentWindow.location.reload();
+            });
+        });
+    </script>
+</body>
+</html> 
