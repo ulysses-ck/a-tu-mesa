@@ -42,7 +42,6 @@ class HomeEditView(TemplateView):
             context['botonmenu'] = home.botonMenu
             context['botonreservacion'] = home.botonReservation
             context['botonseguimientodepedido'] = home.botonSeguimientoDePedido
-            self.template_name = f'{kwargs.get("template_name")}.html'
 
         return context
 
