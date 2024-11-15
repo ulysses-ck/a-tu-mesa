@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .models import Home
 from django.contrib import messages
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.decorators import method_decorator
+from .forms import UserForm, PersonaForm
+from apps.persona.models import Persona
 
 @method_decorator(xframe_options_exempt, name='dispatch')
 class HomeView(TemplateView):
@@ -104,3 +107,34 @@ class LoginView(TemplateView):
 
         # Si la autenticación falla, recarga el mismo formulario de login
         return render(request, self.template_name)
+
+@method_decorator(xframe_options_exempt, name='dispatch')
+class UserCreateForm(TemplateView):
+    name = "user_create"
+    template_name = "user_create.html"
+    def get(self, request):
+        user_form = UserForm()
+        persona_form = PersonaForm()
+        return render(request, 'user_create.html', {'user_form': user_form, 'persona_form': persona_form})
+    
+    def user_create(request):
+        user_form = UserForm(request.POST)
+        persona_form = PersonaForm(request.POST)
+        if user_form.is_valid() and persona_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
+            persona = persona_form.save(commit=False)
+            persona.user = user
+            persona.save()
+            messages.success(request, 'Creado con exito')
+            return render(request, 'home/create_user.html', {
+                'user_form': UserForm(),  # Reinicia el formulario
+                'persona_form': PersonaForm()    # Reinicia el formulario
+            })
+        else:
+            messages.error(request, "Hubo un error al crear el usuario.")
+            return render(request, 'home/create_user.html', {
+                'user_form': user_form,
+                'persona_form': persona_form
+            })

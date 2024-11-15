@@ -4,4 +4,4 @@ from apps.persona.models import Persona
 
 @admin.register(Persona)
 class PersonaAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'rol', 'correo', 'telefono', 'documento')
+    list_display = ('nombre', 'apellido', 'rol', 'correo', 'telefono', 'documento')

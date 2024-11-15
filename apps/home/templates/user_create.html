@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .split-screen {
+            display: flex;
+            height: 100vh;
+        }
+        .edit-panel {
+            width: 40%;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .preview-panel {
+            width: 60%;
+            height: 100vh;
+            border: none;
+        }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Usuario</h1>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <h3>Información de Usuario</h3>
+        {{ user_form.as_p }}
+        <h3>Información Personal</h3>
+        {{ persona_form.as_p }}
+        <button type="submit">Crear Usuario</button>
+    </form>
+</body>
+</html> 
