@@ -9,3 +9,6 @@ class Comanda (models.Model):
 		ticket = models.ForeignKey("ticket.Ticket", on_delete=models.CASCADE, null=True, blank=True)
 		mesa = models.ForeignKey("mesa.Mesa", on_delete=models.CASCADE)
 		fecha = models.DateTimeField()
+
+		def __str__(self):
+			return f"Comanda {self.id} - Mesa {self.mesa.nro_mesa} - Producto: {self.producto.nombre} - Cantidad: {self.cantidad}"

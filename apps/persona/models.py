@@ -7,3 +7,6 @@ class Persona (models.Model):
 	correo = models.EmailField(max_length=50)
 	telefono = models.CharField(max_length=10)
 	documento = models.CharField(max_length=10)
+
+	def __str__(self):
+		return f"{self.nombre} - {self.rol.nombre}"
