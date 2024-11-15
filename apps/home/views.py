@@ -89,15 +89,18 @@ class LoginView(TemplateView):
     name = 'login'
     template_name = 'login.html'
 
-    def index_view(request):
-        if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
+    def post(self, request, *args, **kwargs):
+        # Obtiene el username y password del formulario
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        # Autentica el usuario
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home:index')
+            return redirect('home')  # Redirige a 'home' en caso de éxito
         else:
-            messages.error(request, 'Invalid credentials')
-        return render(request, 'home/index.html')
+            messages.error(request, 'Credenciales incorrectas')  # Muestra un mensaje de error
+
+        # Si la autenticación falla, recarga el mismo formulario de login
+        return render(request, self.template_name)

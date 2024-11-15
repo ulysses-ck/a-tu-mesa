@@ -34,10 +34,10 @@
 </head>
 <body>
     <div class="split-screen">
-        <!-- Panel de Edición -->
+        <!-- Panel deform -->
         <div class="edit-panel">
             <div class="sticky-header">
-                <h3 class="mb-3">Editar Contenido Principal</h3>
+                <h3 class="mb-3">Bienvenido</h3>
             </div>
             <div class="card">
                 <div class="card-body">
@@ -46,17 +46,13 @@
                         
                         <div class="mb-3">
                             <label class="form-label">UserName</label>
-                            <input type="text" name="banner" class="form-control preview-update" 
-                                value="{{ banner }}"
-                                data-preview-target="banner-preview"
+                            <input type="text" name="username" class="form-control"
                                 placeholder="Ingrese nombre de Usuario">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="text" name="botonmenu" class="form-control preview-update" 
-                                value="{{ botonmenu }}"
-                                data-preview-target="menu-preview"
+                            <input type="text" name="password" class="form-control"
                                 placeholder="Ingrese contraseña">
                         </div>
                         <div class="d-grid gap-2">
@@ -64,6 +60,13 @@
                             <a href="/" class="btn btn-secondary">Volver al Inicio</a>
                         </div>
                     </form>
+                        {% if message %}
+                            <div class="alert alert-danger mt-3">
+                                {% for message in messages%}
+                                    <p>{{message}}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                 </div>
             </div>
         </div>
@@ -73,38 +76,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Actualización en tiempo real de la vista previa
-        document.querySelectorAll('.preview-update').forEach(input => {
-            input.addEventListener('input', function() {
-                const previewFrame = document.getElementById('previewFrame');
-                const previewDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-                const targetId = this.getAttribute('data-preview-target');
-                const targetElement = previewDoc.getElementById(targetId);
-                
-                if (targetElement) {
-                    if (targetElement.tagName === 'IMG') {
-                        targetElement.src = this.value;
-                    } else {
-                        targetElement.style.backgroundImage = `url(${this.value})`;
-                    }
-                }
-            });
-        });
-
-        // Recargar el iframe después de enviar el formulario
-        document.getElementById('editForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: {
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                }
-            }).then(() => {
-                document.getElementById('previewFrame').contentWindow.location.reload();
-            });
-        });
-    </script>
 </body>
-</html> 
+</html>
