@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .product-list {
+        margin-top: 20px;
+      }
+      .product-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      button {
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Productos</h1>
+
+    <div>
+      <input type="text" id="productInput" placeholder="Nombre del producto" />
+      <input type="text" id="productPrice" placeholder="Precio del producto" />
+      <button onclick="addProduct()">Agregar Producto</button>
+    </div>
+
+    <div class="product-list" id="productList"></div>
+
+    <script>
+      const productList = document.getElementById("productList");
+      const productPrice = document.getElementById("productPrice");
+
+      function addProduct() {
+        const productInput = document.getElementById("productInput");
+        const productPrice = document.getElementById("productPrice");
+        const productName = productInput.value.trim();
+        const productValue = productPrice.value.trim();
+
+        if (productName === "") {
+          alert("Por favor ingresa un nombre de producto.");
+          return;
+        }
+
+        const productItem = document.createElement("div");
+        productItem.className = "product-item";
+
+        productItem.innerHTML = `
+        <span>${productName}</span>
+        <span>${productValue}</span>
+        <div>
+          <button onclick="editProduct(this)">Editar</button>
+          <button onclick="deleteProduct(this)">Eliminar</button>
+        </div>
+      `;
+
+        productList.appendChild(productItem);
+        productInput.value = "";
+      }
+
+      function deleteProduct(button) {
+        const productItem = button.parentElement.parentElement;
+        productList.removeChild(productItem);
+      }
+
+      function editProduct(button) {
+        const productItem = button.parentElement.parentElement;
+        const productName = productItem.querySelector("span");
+        const newProductName = prompt(
+          "Edita el nombre del producto:",
+          productName.textContent
+        );
+
+        if (newProductName !== null && newProductName.trim() !== "") {
+          productName.textContent = newProductName;
+        }
+      }
+    </script>
+  </body>
+</html>
