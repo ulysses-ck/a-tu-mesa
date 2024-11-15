@@ -1,11 +1,7 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Comanda
-from django.contrib import messages
-from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils.decorators import method_decorator
 
-class ComandaView(TemplateView):
+class ComandasView(TemplateView):
     name = 'comanda'
     template_name = 'comanda.html'
     
@@ -13,4 +9,3 @@ class ComandaView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['comanda'] = Comanda.objects.all()
         return context
-# Create your views here.
