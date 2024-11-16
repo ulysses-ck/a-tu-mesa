@@ -1,10 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'template_admin.html' %}
 
-{% block title %}
-Productos - Eliminar Comanda {{ comanda.id }}
-{% endblock %}
-
-{% block content %}
+{% block main %}
 <form method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     {{ form }}
