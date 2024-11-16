@@ -6,4 +6,4 @@ class Ticket (models.Model):
 	notas = models.CharField(max_length=120)
 
 	def __str__(self):
-		return self.nombre
+		return f"{self.id}"
