@@ -11,7 +11,7 @@ class EstadoView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['estado'] = Estado.objects.all()
+        context['estados'] = Estado.objects.all()
         return context
 
 # Create your views here.
