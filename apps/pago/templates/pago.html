@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Pagos
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        <h2>Mesas</h2>
+        {% url 'create_pago' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>nro_autorizacion</th>
+                        <th>fecha</th>
+                        <th>pagador</th>
+                        <th>forma_de_pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pago in pagos %}
+                    <tr>
+                        <td>{{ pago.id }}</td>
+                        <td>{{ pago.nro_autorizacion }}</td>
+                        <td>{{ pago.fecha }}</td>
+                        <td>{{ pago.pagador }}</td>
+                        <td>{{ pago.forma_de_pago }}</td>
+                        <td>
+                            {% url 'update_pago' pago.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_pago' pago.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
