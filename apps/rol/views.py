@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 
 class RolView(TemplateView):
     name = 'Rol'
-    template_name = 'Rol.html'
+    template_name = 'rol_read.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
