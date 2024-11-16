@@ -8,6 +8,8 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.decorators import method_decorator
 from .forms import UserForm, PersonaForm
 from apps.persona.models import Persona
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 
 @method_decorator(xframe_options_exempt, name='dispatch')
 class HomeView(TemplateView):
@@ -109,14 +111,50 @@ class LoginView(TemplateView):
         return render(request, self.template_name)
 
 @method_decorator(xframe_options_exempt, name='dispatch')
-class UserCreateForm(TemplateView):
+class UserCreateForm(FormView):
     name = "user_create"
     template_name = "user_create.html"
+    success_url = reverse_lazy('home')  # Redirigir al home después de crear el usuario
+    form_class = UserForm  # El formulario principal
+
+    def get_context_data(self, **kwargs):
+        """Agrega el formulario de Persona al contexto."""
+        context = super().get_context_data(**kwargs)
+        if 'persona_form' not in context:
+            context['persona_form'] = PersonaForm()
+        return context
+
+    def form_valid(self, form):
+        """Procesa los datos del formulario UserForm."""
+        persona_form = PersonaForm(self.request.POST)
+        if persona_form.is_valid():
+            # Guarda el usuario
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # Encripta la contraseña
+            user.save()
+
+            # Guarda la Persona asociada
+            persona = persona_form.save(commit=False)
+            persona.user = user
+            persona.save()
+
+            messages.success(self.request, "Usuario creado con éxito.")
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, "Error en el formulario de Persona.")
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        """Manejo de errores del formulario UserForm."""
+        messages.error(self.request, "Error en el formulario.")
+        return self.render_to_response(self.get_context_data(form=form))
+
+"""
     def get(self, request):
         user_form = UserForm()
         persona_form = PersonaForm()
         return render(request, 'user_create.html', {'user_form': user_form, 'persona_form': persona_form})
-    
+
     def user_create(request):
         user_form = UserForm(request.POST)
         persona_form = PersonaForm(request.POST)
@@ -137,4 +175,4 @@ class UserCreateForm(TemplateView):
             return render(request, 'home/create_user.html', {
                 'user_form': user_form,
                 'persona_form': persona_form
-            })
+            })"""

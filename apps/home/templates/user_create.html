@@ -33,23 +33,28 @@
     </style>
 </head>
 <body>
-    <h1>Crear Usuario</h1>
+    <div class="split-screen">
+        <div class="edit-panel">
+            <h1>Crear Usuario</h1>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        <h3>Información de Usuario</h3>
-        {{ user_form.as_p }}
-        <h3>Información Personal</h3>
-        {{ persona_form.as_p }}
-        <button type="submit">Crear Usuario</button>
-    </form>
+            <form method="post">
+            {% csrf_token %}
+            <h3>Información de Usuario</h3>
+            {{ form.as_p }}
+            <h3>Información Personal</h3>
+            {{ persona_form.as_p }}
+            <button type="submit">Crear Usuario</button>
+            </form>
+        </div>
+        <iframe src="/" class="preview-panel" id="previewFrame"></iframe>
+    </div>
 </body>
-</html> 
+</html>
