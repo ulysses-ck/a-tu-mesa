@@ -19,19 +19,25 @@ Productos
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Fecha</th>
-                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Tipo de Pedido</th>
+                        <th>Ticket</th>
+                        <th>Mesa</th>
+                        <th>Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for comanda in comandas %}
                     <tr>
                         <td>{{ comanda.id }}</td>
-                        <td>{{ comanda.fecha }}</td>
-                        <td>{{ comanda.cliente }}</td>
+                        <td>{{ comanda.producto }}</td>
+                        <td>{{ comanda.cantidad }}</td>
                         <td>{{ comanda.estado }}</td>
+                        <td>{{ comanda.tipo_de_pedido }}</td>
+                        <td>{{ comanda.ticket }}</td>
+                        <td>{{ comanda.mesa }}</td>
                         <td>
                             {% url 'update_comanda' comanda.id as url_update %}
                             <a href="{{ url_update }}" class="btn btn-info">Editar</a>
