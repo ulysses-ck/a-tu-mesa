@@ -1,9 +1,5 @@
-from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Producto
-from django.contrib import messages
-from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils.decorators import method_decorator
 
 class ProductoView(TemplateView):
     name = 'producto'

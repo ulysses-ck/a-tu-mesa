@@ -1,9 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Pago
-from django.contrib import messages
-from django.views.decorators.clickjacking import xframe_options_exempt
-from django.utils.decorators import method_decorator
 
 class PagoView(TemplateView):
     name = 'Pago'
