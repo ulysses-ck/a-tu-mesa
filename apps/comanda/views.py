@@ -3,7 +3,7 @@ from .models import Comanda
 
 class ComandasView(TemplateView):
     name = 'comanda'
-    template_name = 'comanda.html'
+    template_name = 'comanda_read.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
