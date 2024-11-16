@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Personas
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        <h2>Personas</h2>
+        {% url 'create_persona' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>user</th>
+                        <th>nombre</th>
+                        <th>apellido</th>
+                        <th>rol</th>
+                        <th>correo</th>
+                        <th>telefono</th>
+                        <th>documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for persona in personas %}
+                    <tr>
+                        <td>{{ persona.id }}</td>
+                        <td>{{ persona.user }}</td>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.apellido }}</td>
+                        <td>{{ persona.rol }}</td>
+                        <td>{{ persona.correo }}</td>
+                        <td>{{ persona.telefono }}</td>
+                        <td>{{ persona.documento }}</td>
+                        <td>
+                            {% url 'update_persona' persona.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_persona' persona.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
