@@ -1,0 +1,45 @@
+{% extends 'template_admin.html' %}
+
+{% block main %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        <h2>Comandas</h2>
+        {% url 'create_producto' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Precio</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.id }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.tipo }}</td>
+                        <td>{{ producto.imagen }}</td>
+                        <td>
+                            {% url 'update_producto' producto.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_producto' producto.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
