@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Administrador
+{% endblock %}
+
+{% block content %}
+<div class="row row-cols-12">
+    <nav
+    class="col-1 d-flex flex-column justify-content-start align-items-center"
+    >
+<a href="/producto">Producto</a>
+<a href="/comandas">Comanda</a>
+<a href="/estado">Estado</a>
+<a href="/factura">Factura</a>
+<a href="/ticket">Ticket</a>
+<a href="/mesa">Mesa</a>
+
+    </nav>
+
+    <main class="col-11">
+
+        {% block main %}{% endblock %}
+        
+    </main>
+</div>
+{% endblock %}
