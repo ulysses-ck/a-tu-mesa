@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Estado
 from django.contrib import messages
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -14,4 +14,23 @@ class EstadoView(TemplateView):
         context['estados'] = Estado.objects.all()
         return context
 
-# Create your views here.
+class CreateEstadoView(CreateView):
+    model = Estado
+    fields = [
+        'nombre',
+    ]
+    template_name = 'estado_create.html'
+    success_url = '/estado'
+
+class UpdateEstadoView(UpdateView):
+    model = Estado
+    fields = [
+        'nombre',
+    ]
+    template_name = 'estado_update.html'
+    success_url = '/estado'
+
+class DeleteEstadoView(DeleteView):
+    model = Estado
+    template_name = 'estado_delete.html'
+    success_url = '/estado'
