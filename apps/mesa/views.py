@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.decorators import method_decorator
 
-class FacturaView(TemplateView):
+class MesaView(TemplateView):
     name = 'mesa'
     template_name = 'mesa.html'
     
