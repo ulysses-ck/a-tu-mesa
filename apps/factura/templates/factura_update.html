@@ -1,10 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'template_admin.html' %}
 
-{% block title %}
-Factura - Actualizar Factura {{ factura.id }}
-{% endblock %}
-
-{% block content %}
+{% block main %}
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update">

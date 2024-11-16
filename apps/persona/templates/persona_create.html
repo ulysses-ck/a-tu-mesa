@@ -1,10 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'template_admin.html' %}
 
-{% block title %}
-Persona - Crear Persona
-{% endblock %}
-
-{% block content %}
+{% block main %}
 <div class="container">
     <form method="post">{% csrf_token %}
         {{ form.as_p }}
