@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.utils.decorators import method_decorator
 
-class ComandaView(TemplateView):
+class EstadoView(TemplateView):
     name = 'estado'
     template_name = 'estado.html'
     
