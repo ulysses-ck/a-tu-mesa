@@ -25,4 +25,12 @@ urlpatterns = [
     path('', include('apps.producto.urls')),
     path('', include('apps.factura.urls')),
     path('', include('apps.comanda.urls')),
+    path('', include('apps.estado.urls')),
+    path('', include('apps.mesa.urls')),
+    path('', include('apps.pago.urls')), 
+    path('', include('apps.persona.urls')),
+    path('', include('apps.promociones.urls')),
+    path('', include('apps.rol.urls')),
+    path('', include('apps.ticket.urls')),
+    path('', include('apps.usuario.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
