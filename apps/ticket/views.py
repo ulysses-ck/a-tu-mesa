@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 
 class TicketView(TemplateView):
     name = 'Ticket'
-    template_name = 'Ticket.html'
+    template_name = 'ticket.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
