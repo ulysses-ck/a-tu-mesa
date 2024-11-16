@@ -6,6 +6,42 @@ Productos
 
 {% block content %}
 <div class="container">
-    <h2>Comandas</h2>
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        <h2>Comandas</h2>
+        {% url 'create_comanda' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comanda in comandas %}
+                    <tr>
+                        <td>{{ comanda.id }}</td>
+                        <td>{{ comanda.fecha }}</td>
+                        <td>{{ comanda.cliente }}</td>
+                        <td>{{ comanda.estado }}</td>
+                        <td>
+                            {% url 'update_comanda' comanda.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_comanda' comanda.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 </div>
 {% endblock %}
