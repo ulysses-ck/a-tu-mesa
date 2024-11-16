@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mesas
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        <h2>Mesas</h2>
+        {% url 'create_mesa' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>nro_mesa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mesa in mesas %}
+                    <tr>
+                        <td>{{ mesa.id }}</td>
+                        <td>{{ mesa.nro_mesa }}</td>
+                        <td>
+                            {% url 'update_mesa' mesa.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_mesa' mesa.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
