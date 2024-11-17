@@ -1,0 +1,41 @@
+{% extends 'template_admin.html' %}
+
+{% block title_heading %}
+Tipos de pedido
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        {% url 'create_tipoDePedido' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tipo in tipoDePedidos %}
+                    <tr>
+                        <td>{{ tipo.id }}</td>
+                        <td>{{ tipo.nombre }}</td>
+                        <td>
+                            {% url 'update_tipoDePedido' tipo.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_tipoDePedido' tipo.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
