@@ -33,4 +33,6 @@ urlpatterns = [
     path('', include('apps.rol.urls')),
     path('', include('apps.ticket.urls')),
     path('', include('apps.usuario.urls')),
+    path('', include('apps.tipoProducto.urls')),
+    path('', include('apps.tipoDePedido.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
