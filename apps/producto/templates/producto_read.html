@@ -30,7 +30,15 @@
                         <td>{{ producto.precio }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.tipo }}</td>
-                        <td>{{ producto.imagen }}</td>
+                        <td>
+                            {% if producto.imagen %}
+                            <div class="align-items-center image-container justify-content-center d-flex" style="width: 50px; height: 50px;">
+                                <img class="mx-auto card-img-top img-fluid img"  src="{{ producto.imagen.url }}" />
+                            </div>
+                            {% else %}
+                            <p>No hay imagen</p>
+                            {% endif %}                            
+                        </td>
                         <td>
                             {% url 'update_producto' producto.id as url_update %}
                             <a href="{{ url_update }}" class="btn btn-info">Editar</a>
