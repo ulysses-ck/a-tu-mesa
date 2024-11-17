@@ -3,7 +3,7 @@
 
 {% block main %}
 <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>¿Esta seguro de que desea eliminar "{{ object }}"?</p>
     {{ form }}
     <input type="submit" value="Confirm">
 </form>
