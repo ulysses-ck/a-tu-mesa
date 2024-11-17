@@ -28,7 +28,7 @@ class CreateProductoView(CreateView):
         'imagen',
     ]
     template_name = 'producto_create.html'
-    success_url = '/productos'
+    success_url = '/producto'
 
 class UpdateProductoView(UpdateView):
     model = Producto
@@ -39,9 +39,9 @@ class UpdateProductoView(UpdateView):
         'imagen',
     ]
     template_name = 'producto_update.html'
-    success_url = '/productos'
+    success_url = '/producto'
 
 class DeleteProductoView(DeleteView):
     model = Producto
     template_name = 'producto_delete.html'
-    success_url = '/productos'
+    success_url = '/producto'
