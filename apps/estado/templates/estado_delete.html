@@ -1,5 +1,5 @@
 {% extends 'template_admin.html' %}
-{% block title_heading %}Eliminar Estado {{ estado.id }}{% endblock %}
+{% block title_heading %}Eliminar Estado {{ object.id }}{%  endblock %}
 
 {% block main %}
 <form method="post">{% csrf_token %}

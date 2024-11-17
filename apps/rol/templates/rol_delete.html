@@ -1,6 +1,6 @@
 {% extends 'template_admin.html' %}
 
-{% block title_heading %}Eliminar Rol {{ rol.id }}{% endblock %}
+{% block title_heading %}Eliminar Rol {{ object.id }}{%  endblock %}
 
 {% block main %}
 <form method="post">{% csrf_token %}

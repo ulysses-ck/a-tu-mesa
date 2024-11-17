@@ -1,5 +1,5 @@
 {% extends 'template_admin.html' %}
-{% block title_heading %}Actualizar Comanda {{ comanda.id }}{% endblock %}
+{% block title_heading %}Actualizar Comanda {{ object.id }}{%  endblock %}
 
 {% block main %}
 <form method="post">{% csrf_token %}

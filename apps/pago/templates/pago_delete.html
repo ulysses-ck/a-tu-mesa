@@ -1,5 +1,5 @@
 {% extends 'template_admin.html' %}
-{% block title_heading %}Eliminar Pago {{ pago.id }}{% endblock %}
+{% block title_heading %}Eliminar Pago {{ object.id }}{%  endblock %}
 
 {% block main %}
 <form method="post">{% csrf_token %}
