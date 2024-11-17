@@ -18,18 +18,14 @@ Tipo Productos
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>descuento</th>
-                        <th>descripcion</th>
-                        <th>condiciones</th>
+                        <th>nombre</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for tipo in tipoProductos %}
                     <tr>
                         <td>{{ tipo.id }}</td>
-                        <td>{{ tipo.descuento }}</td>
-                        <td>{{ tipo.descripcion }}</td>
-                        <td>{{ tipo.condiciones }}</td>
+                        <td>{{ tipo.nombre }}</td>
                         <td>
                             {% url 'update_tipoProducto' tipo.id as url_update %}
                             <a href="{{ url_update }}" class="btn btn-info">Editar</a>
