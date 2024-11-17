@@ -1,11 +1,11 @@
 {% extends 'template_admin.html' %}
+{% block title_heading %}Mesas{% endblock %}
 
 {% block main %}
 <div class="container">
     <div 
     class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
     >
-        <h2>Mesas</h2>
         {% url 'create_mesa' as url_create %}
         <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
     </div>

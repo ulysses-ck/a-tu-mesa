@@ -1,4 +1,5 @@
 {% extends 'template_admin.html' %}
+{% block title_heading %}Actualizar Comanda {{ comanda.id }}{% endblock %}
 
 {% block main %}
 <form method="post">{% csrf_token %}
