@@ -42,11 +42,11 @@ class DeletePromocionesView(DeleteView):
 
 class CondicionesView(TemplateView):
     name = 'condiciones'
-    template_name = 'condiciones.html'
+    template_name = 'condiciones_read.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['condiciones'] = Condiciones.objects.all()
+        context['condiciones_list'] = Condiciones.objects.all()
         return context
     
 class CreateCondicionesView(CreateView):
