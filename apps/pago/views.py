@@ -41,8 +41,7 @@ class DeletePagoView(DeleteView):
 # forma pago
 
 class FormaPagoView(TemplateView):
-    name = 'FormaPago'
-    template_name = 'forma_pago_read.html'
+    template_name = 'formapago_read.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -54,7 +53,7 @@ class CreateFormaPagoView(CreateView):
     fields = [
         'nombre',
     ]
-    template_name = 'forma_pago_create.html'
+    template_name = 'formapago_create.html'
     success_url = '/forma_pago'
 
 class UpdateFormaPagoView(UpdateView):
@@ -62,10 +61,10 @@ class UpdateFormaPagoView(UpdateView):
     fields = [
         'nombre',
     ]
-    template_name = 'forma_pago_update.html'
+    template_name = 'formapago_update.html'
     success_url = '/forma_pago'
 
 class DeleteFormaPagoView(DeleteView):
     model = FormaDePago
-    template_name = 'forma_pago_delete.html'
+    template_name = 'formapago_delete.html'
     success_url = '/forma_pago'
