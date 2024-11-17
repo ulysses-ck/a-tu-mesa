@@ -22,9 +22,16 @@ Productos
         {% for producto in productos %}
         <div class="col">
             <div class="card">
+                {% if producto.imagen %}
                 <div class="align-items-center image-container justify-content-center d-flex">
                     <img class="mx-auto card-img-top img-fluid img" src="{{ producto.imagen.url }}" />
                 </div>
+                {% else %}
+                
+                <div class="align-items-center image-container justify-content-center d-flex">
+                    <img class="mx-auto card-img-top img-fluid img" src="https://placehold.co/600x400?text=Sin%20imagen" />
+                </div>
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ producto.nombre }}</h5>
                     <p class="card-text">${{ producto.precio }}</p>
