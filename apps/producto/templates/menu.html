@@ -16,6 +16,20 @@ Productos
         object-fit: cover;
     }
 </style>
+
+<form method="get" class="mb-4">
+    <label for="tipo" class="form-label">Filtrar por tipo:</label>
+    <select name="tipo" id="tipo" class="form-select" multiple>
+        {% for tipo in tipos %}
+        <option value="{{ tipo.nombre }}" 
+            {% if tipo.nombre in tipos_seleccionados %}selected{% endif %}>
+            {{ tipo.nombre }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+</form>
+
 <div class="container">
     <h1>Productos</h1>
     <div class="row row-cols-3">
