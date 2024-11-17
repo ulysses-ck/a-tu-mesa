@@ -22,7 +22,7 @@ class CreateComandaView(CreateView):
         'fecha'
     ]
     template_name = 'comanda_create.html'
-    success_url = '/comandas'
+    success_url = '/comanda'
 
 class UpdateComandaView(UpdateView):
     model = Comanda
@@ -36,9 +36,9 @@ class UpdateComandaView(UpdateView):
         'fecha'
     ]
     template_name = 'comanda_update.html'
-    success_url = '/comandas'
+    success_url = '/comanda'
 
 class DeleteComandaView(DeleteView):
     model = Comanda
     template_name = 'comanda_delete.html'
-    success_url = '/comandas'
+    success_url = '/comanda'
