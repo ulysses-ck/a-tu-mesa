@@ -1,0 +1,43 @@
+{% extends 'template_admin.html' %}
+{% block title_heading %}Tickets{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div 
+    class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
+    >
+        {% url 'create_ticket' as url_create %}
+        <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Promocion</th>
+                        <th>Fecha</th>
+                        <th>Notas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.promocion }}</td>
+                        <td>{{ ticket.fecha }}</td>
+                        <td>{{ ticket.notas }}</td>
+                        <td>
+                            {% url 'update_ticket' ticket.id as url_update %}
+                            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
+                            {% url 'delete_ticket' ticket.id as url_delete %}
+                            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>
+{% endblock %}
