@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Promociones
 
 class PromocionesView(TemplateView):
@@ -10,4 +10,28 @@ class PromocionesView(TemplateView):
         context['promociones'] = Promociones.objects.all()
         return context
 
-# Create your views here.
+class CreatePromocionesView(CreateView):
+    model = Promociones
+    fields = [
+        'descuento',
+        'descripcion',
+        'condiciones',
+    ]
+    template_name = 'promociones_create.html'
+    success_url = '/promociones'
+
+class UpdatePromocionesView(UpdateView):
+    model = Promociones
+    fields = [
+        'descuento',
+        'descripcion',
+        'condiciones',
+    ]
+    template_name = 'promociones_update.html'
+    success_url = '/promociones'
+
+class DeletePromocionesView(DeleteView):
+    model = Promociones
+    template_name = 'promociones_delete.html'
+    success_url = '/promociones'
+
