@@ -5,9 +5,9 @@ Administrador
 {% endblock %}
 
 {% block content %}
-<div class="row row-cols-12 container">
+<div class="row row-cols-12">
     <nav
-    class="col-1 d-flex flex-column justify-content-start align-items-start mt-4"
+    class="col-1 d-flex flex-column justify-content-start align-items-start p-4 bg-dark min-vh-100"
     >
     {% url 'comanda' as comanda %}
     {% url 'estado' as estado %}
@@ -21,7 +21,7 @@ Administrador
     {% url 'tipoDePedido' as tipo_pedido %}
     {% url 'forma_pago' as forma_pago %}
     {% url 'condiciones' as condiciones %}
-    
+    {% url 'administracion' as administracion %}
 
     <a href="{{ comanda }}">Comanda</a>
     <a href="{{ condiciones }}">Condiciones</a>
@@ -35,7 +35,7 @@ Administrador
     <a href="{{ rol }}">Rol</a>
     <a href="{{ tipo_producto }}">Tipo Producto</a>
     <a href="{{ tipo_pedido }}">Tipo Pedido</a>
-    
+    <a href="{{ administracion }}">Administración</a>
     </nav>
 
     <main class="col-11">
