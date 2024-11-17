@@ -1,12 +1,12 @@
 {% extends 'template_admin.html' %}
-{% block title_heading %}Crear Comanda{% endblock %}
+{% block title_heading %}Listar Productos{% endblock %}
 
 {% block main %}
 <div class="container">
     <div 
     class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
     >
-        <h2>Comandas</h2>
+        <h2>Productos</h2>
         {% url 'create_producto' as url_create %}
         <a href="{{ url_create }}" class="btn btn-primary">Crear</a>
     </div>
