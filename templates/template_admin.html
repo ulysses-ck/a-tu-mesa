@@ -9,20 +9,27 @@ Administrador
     <nav
     class="col-1 d-flex flex-column justify-content-start align-items-center"
     >
-    {% url 'producto_admin' as producto %}
-    <a href="{{ producto }}">Producto</a>
     {% url 'comanda' as comanda %}
-    <a href="{{ comanda }}">Comanda</a>
     {% url 'estado' as estado %}
-    <a href="{{ estado }}">Estado</a>
-    {% url 'mesa' as mesa %}
-    <a href="{{ mesa }}">Mesa</a>
     {% url 'factura' as factura %}
-    <a href="{{ factura }}">Factura</a>
+    {% url 'mesa' as mesa %}
     {% url 'pago' as pago %}
-    <a href="{{ pago }}">Pago</a>
     {% url 'persona' as persona%}
+    {% url 'producto_admin' as producto %}
+    {% url 'rol' as rol %}
+    {% url 'tipoProducto' as tipo_producto %}
+    {% url 'tipoDePedido' as tipo_pedido %}
+
+    <a href="{{ comanda }}">Comanda</a>
+    <a href="{{ estado }}">Estado</a>
+    <a href="{{ factura }}">Factura</a>
+    <a href="{{ mesa }}">Mesa</a>
+    <a href="{{ pago }}">Pago</a>
     <a href="{{ persona }}">Persona</a>
+    <a href="{{ producto }}">Producto</a>
+    <a href="{{ rol }}">Rol</a>
+    <a href="{{ tipo_producto }}">Tipo Producto</a>
+    <a href="{{ tipo_pedido }}">Tipo Pedido</a>
     </nav>
 
     <main class="col-11">
