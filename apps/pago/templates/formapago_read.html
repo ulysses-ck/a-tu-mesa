@@ -1,5 +1,5 @@
 {% extends 'template_admin.html' %}
-{% block title_heading %}Pagos{% endblock %}
+{% block title_heading %}Forma Pagos{% endblock %}
 
 {% block main %}
 <div class="container">
@@ -20,14 +20,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pago in pagos %}
+                    {% for forma in formas_pagos %}
                     <tr>
-                        <td>{{ pago.id }}</td>
-                        <td>{{ pago.nombre }}</td>
+                        <td>{{ forma.id }}</td>
+                        <td>{{ forma.nombre }}</td>
                         <td>
-                            {% url 'update_form_pago' pago.id as url_update %}
+                            {% url 'update_forma_pago' forma.id as url_update %}
                             <a href="{{ url_update }}" class="btn btn-info">Editar</a>
-                            {% url 'delete_form_pago' pago.id as url_delete %}
+                            {% url 'delete_forma_pago' forma.id as url_delete %}
                             <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
