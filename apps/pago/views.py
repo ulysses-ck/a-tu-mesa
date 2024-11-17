@@ -3,7 +3,7 @@ from .models import Pago
 
 class PagoView(TemplateView):
     name = 'Pago'
-    template_name = 'pago.html'
+    template_name = 'pago_read.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
