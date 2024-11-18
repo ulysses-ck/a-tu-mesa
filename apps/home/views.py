@@ -10,6 +10,9 @@ from .forms import UserForm, PersonaForm
 from apps.persona.models import Persona
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 @method_decorator(xframe_options_exempt, name='dispatch')
 class HomeView(TemplateView):
@@ -149,30 +152,6 @@ class UserCreateForm(FormView):
         messages.error(self.request, "Error en el formulario.")
         return self.render_to_response(self.get_context_data(form=form))
 
-"""
-    def get(self, request):
-        user_form = UserForm()
-        persona_form = PersonaForm()
-        return render(request, 'user_create.html', {'user_form': user_form, 'persona_form': persona_form})
-
-    def user_create(request):
-        user_form = UserForm(request.POST)
-        persona_form = PersonaForm(request.POST)
-        if user_form.is_valid() and persona_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user_form.cleaned_data['password'])
-            user.save()
-            persona = persona_form.save(commit=False)
-            persona.user = user
-            persona.save()
-            messages.success(request, 'Creado con exito')
-            return render(request, 'home/create_user.html', {
-                'user_form': UserForm(),  # Reinicia el formulario
-                'persona_form': PersonaForm()    # Reinicia el formulario
-            })
-        else:
-            messages.error(request, "Hubo un error al crear el usuario.")
-            return render(request, 'home/create_user.html', {
-                'user_form': user_form,
-                'persona_form': persona_form
-            })"""
+def logout_view(request):
+    logout(request)  # Finaliza la sesión del usuario
+    return redirect("login")  # Redirige a la página de login

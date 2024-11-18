@@ -30,29 +30,72 @@
             padding: 10px 0;
             z-index: 1000;
         }
+        .form-group {
+            display: flex;
+            flex-direction: column; /* Alinea en columna */
+            margin-bottom: 15px;    /* Espaciado entre campos */
+        }
+        
+        label {
+            display: block;         /* Asegura que el label sea visible */
+            margin-bottom: 5px;     /* Espacio entre label e input */
+        }
+        
+        input, select, textarea {
+            width: 100%;            /* Asegura un tamaño uniforme */
+            padding: 8px;           /* Espaciado interno */
+            border: 1px solid #ccc; /* Bordes personalizados */
+            border-radius: 4px;     /* Bordes redondeados */
+        }
     </style>
 </head>
 <body>
     <div class="split-screen">
         <div class="edit-panel">
-            <h1>Crear Usuario</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h1>Crear Usuario</h1>
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
+                    <form method="post">
+                    {% csrf_token %}
+                    <h3>Información de Usuario</h3>
+                    {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                     {% endfor %}
-                </ul>
-            {% endif %}
-
-            <form method="post">
-            {% csrf_token %}
-            <h3>Información de Usuario</h3>
-            {{ form.as_p }}
-            <h3>Información Personal</h3>
-            {{ persona_form.as_p }}
-            <button type="submit">Crear Usuario</button>
-            </form>
+                    <h3>Información Personal</h3>
+                    {% for field in persona_form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                        <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <iframe src="/" class="preview-panel" id="previewFrame"></iframe>
     </div>
