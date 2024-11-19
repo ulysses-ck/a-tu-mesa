@@ -35,3 +35,12 @@ class DeleteMesaView(LoginRequidMixinWithLoginURL, DeleteView):
     model = Mesa
     template_name = "mesa_delete.html"
     success_url = "/mesa"
+
+class CajaView(TemplateView):
+    name = "caja"
+    template_name = "caja.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["mesas"] = Mesa.objects.all()
+        return context

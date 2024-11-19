@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Caja
+{% endblock %}
+
+<!-- aca va la vista de caja -->
+{% block content %}
+{% for mesa in mesas %}
+    <p>{{ mesa.id }}</p>
+{% endfor %}
+{% endblock %}
