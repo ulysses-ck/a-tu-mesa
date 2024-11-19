@@ -17,7 +17,7 @@ from common.mixins import LoginRequidMixinWithLoginURL
 
 
 @method_decorator(xframe_options_exempt, name="dispatch")
-class HomeView(LoginRequidMixinWithLoginURL, TemplateView):
+class HomeView(TemplateView):
     name = "home"
     template_name = "home.html"
 
