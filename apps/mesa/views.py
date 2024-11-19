@@ -49,6 +49,7 @@ class CajaView(TemplateView):
             context = super().get_context_data(**kwargs)
             context["mesas"] = Mesa.objects.all()
             context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
+            context['valor_total'] = sum([comanda.producto.precio for comanda in context['comandas']])
 
             return context
         context = super().get_context_data(**kwargs)
