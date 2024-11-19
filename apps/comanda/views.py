@@ -1,7 +1,9 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Comanda
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ComandasView(TemplateView):
+class ComandasView(LoginRequiredMixin ,TemplateView):
+    login_url = '/login/' 
     name = 'comanda'
     template_name = 'comanda_read.html'
     
@@ -10,7 +12,7 @@ class ComandasView(TemplateView):
         context['comandas'] = Comanda.objects.all()
         return context
 
-class CreateComandaView(CreateView):
+class CreateComandaView(LoginRequiredMixin, CreateView):
     model = Comanda
     fields = [
         'producto',
@@ -24,7 +26,7 @@ class CreateComandaView(CreateView):
     template_name = 'comanda_create.html'
     success_url = '/comanda'
 
-class UpdateComandaView(UpdateView):
+class UpdateComandaView(LoginRequiredMixin, UpdateView):
     model = Comanda
     fields = [
         'producto',
@@ -38,7 +40,7 @@ class UpdateComandaView(UpdateView):
     template_name = 'comanda_update.html'
     success_url = '/comanda'
 
-class DeleteComandaView(DeleteView):
+class DeleteComandaView(LoginRequiredMixin, DeleteView):
     model = Comanda
     template_name = 'comanda_delete.html'
     success_url = '/comanda'
