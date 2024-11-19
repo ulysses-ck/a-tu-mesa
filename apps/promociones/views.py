@@ -1,8 +1,10 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Promociones, Condiciones
 
+from common.mixins import LoginRequidMixinWithLoginURL
+
 # promociones
-class PromocionesView(TemplateView):
+class PromocionesView(LoginRequidMixinWithLoginURL, TemplateView):
     name = 'promociones'
     template_name = 'promociones.html'
     
