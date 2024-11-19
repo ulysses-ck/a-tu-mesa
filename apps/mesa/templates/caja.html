@@ -6,7 +6,34 @@ Caja
 
 <!-- aca va la vista de caja -->
 {% block content %}
-{% for mesa in mesas %}
+<style>
+    /* tres columnas para la clase caja */
+    .caja {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+        background-color: #fff;
+        color: #444;
+    }
+</style>
+
+
+<div class="container">
+    <div class="caja">
+        <div>
+            <h1>Mesas</h1>
+            {% for mesa in mesas %}
     <p>{{ mesa.id }}</p>
 {% endfor %}
+        </div>
+
+<div>
+    <h1>Comandas</h1>
+    {% for comanda in comandas %}
+    <p>{{ comanda.producto }}</p>
+{% endfor %}
+</div>
+    </div>
+
+</div>
 {% endblock %}

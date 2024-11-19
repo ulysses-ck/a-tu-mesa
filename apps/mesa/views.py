@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Mesa
+from apps.comanda.models import Comanda
 from common.mixins import LoginRequidMixinWithLoginURL
 
 
@@ -40,7 +41,16 @@ class CajaView(TemplateView):
     name = "caja"
     template_name = "caja.html"
 
+
+
     def get_context_data(self, **kwargs):
+        mesa_seleccionada = self.request.GET.get("mesa")
+        if mesa_seleccionada:
+            context = super().get_context_data(**kwargs)
+            context["mesas"] = Mesa.objects.all()
+            context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
+
+            return context
         context = super().get_context_data(**kwargs)
         context["mesas"] = Mesa.objects.all()
         return context
