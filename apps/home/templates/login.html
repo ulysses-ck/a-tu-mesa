@@ -41,7 +41,8 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" id="editForm">
+                    {% url 'login' as url_login %}
+                    <form method="post" action="{{ url_login }}?redirect_to={{ request.GET.redirect_to }}" id="editForm">
                         {% csrf_token %}
                         
                         <div class="mb-3">

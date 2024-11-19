@@ -96,6 +96,8 @@ class HomeAbout(TemplateView):
 class LoginView(TemplateView):
     name = 'login'
     template_name = 'login.html'
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
 
     def post(self, request, *args, **kwargs):
         # Obtiene el username y password del formulario
@@ -106,7 +108,8 @@ class LoginView(TemplateView):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  # Redirige a 'home' en caso de éxito
+            redirect_to = request.GET.get(self.redirect_field_name, 'home')
+            return redirect(redirect_to) # redirige a la página que se intentó acceder
         else:
             messages.error(request, 'Credenciales incorrectas')  # Muestra un mensaje de error
 
