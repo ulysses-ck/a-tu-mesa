@@ -1,70 +1,80 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Pago, FormaDePago
+from common.mixins import LoginRequidMixinWithLoginURL
+
 
 # pago
-class PagoView(TemplateView):
-    name = 'Pago'
-    template_name = 'pago_read.html'
-    
+class PagoView(LoginRequidMixinWithLoginURL, TemplateView):
+    name = "Pago"
+    template_name = "pago_read.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pagos'] = Pago.objects.all()
+        context["pagos"] = Pago.objects.all()
         return context
-class CreatePagoView(CreateView):
+
+
+class CreatePagoView(LoginRequidMixinWithLoginURL, CreateView):
     model = Pago
     fields = [
-        'nro_autorizacion',
-        'fecha',
-        'pagador',
-        'forma_de_pago',
+        "nro_autorizacion",
+        "fecha",
+        "pagador",
+        "forma_de_pago",
     ]
-    template_name = 'pago_create.html'
-    success_url = '/pago'
+    template_name = "pago_create.html"
+    success_url = "/pago"
 
-class UpdatePagoView(UpdateView):
+
+class UpdatePagoView(LoginRequidMixinWithLoginURL, UpdateView):
     model = Pago
     fields = [
-        'nro_autorizacion',
-        'fecha',
-        'pagador',
-        'forma_de_pago',
+        "nro_autorizacion",
+        "fecha",
+        "pagador",
+        "forma_de_pago",
     ]
-    template_name = 'pago_update.html'
-    success_url = '/pago'
+    template_name = "pago_update.html"
+    success_url = "/pago"
 
-class DeletePagoView(DeleteView):
+
+class DeletePagoView(LoginRequidMixinWithLoginURL, DeleteView):
     model = Pago
-    template_name = 'pago_delete.html'
-    success_url = '/pago'   
+    template_name = "pago_delete.html"
+    success_url = "/pago"
 
 
 # forma pago
 
-class FormaPagoView(TemplateView):
-    template_name = 'formapago_read.html'
-    
+
+class FormaPagoView(LoginRequidMixinWithLoginURL, TemplateView):
+    template_name = "formapago_read.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['formas_pagos'] = FormaDePago.objects.all()
+        context["formas_pagos"] = FormaDePago.objects.all()
         return context
-    
-class CreateFormaPagoView(CreateView):
+
+
+class CreateFormaPagoView(LoginRequidMixinWithLoginURL, CreateView):
     model = FormaDePago
     fields = [
-        'nombre',
+        "nombre",
     ]
-    template_name = 'formapago_create.html'
-    success_url = '/forma_pago'
+    template_name = "formapago_create.html"
+    success_url = "/forma_pago"
 
-class UpdateFormaPagoView(UpdateView):
+
+class UpdateFormaPagoView(LoginRequidMixinWithLoginURL, UpdateView):
     model = FormaDePago
     fields = [
-        'nombre',
+        "nombre",
     ]
-    template_name = 'formapago_update.html'
-    success_url = '/forma_pago'
+    template_name = "formapago_update.html"
+    success_url = "/forma_pago"
 
-class DeleteFormaPagoView(DeleteView):
+
+class DeleteFormaPagoView(LoginRequidMixinWithLoginURL, DeleteView):
     model = FormaDePago
-    template_name = 'formapago_delete.html'
-    success_url = '/forma_pago'
+    template_name = "formapago_delete.html"
+    success_url = "/forma_pago"
