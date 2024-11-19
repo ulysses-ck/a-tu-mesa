@@ -1,4 +1,6 @@
 Django
+Pillow
+
+# desarrollo
 django-extensions
 django-dbml
-Pillow
