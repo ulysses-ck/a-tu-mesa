@@ -1,7 +1,9 @@
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, FormView
 from .models import Mesa
 from apps.comanda.models import Comanda
 from common.mixins import LoginRequidMixinWithLoginURL
+from .forms import TicketForm
+from django.contrib import messages
 
 
 class MesaView(TemplateView):
@@ -37,10 +39,10 @@ class DeleteMesaView(LoginRequidMixinWithLoginURL, DeleteView):
     template_name = "mesa_delete.html"
     success_url = "/mesa"
 
-class CajaView(TemplateView):
+class CajaView(FormView):
     name = "caja"
     template_name = "caja.html"
-
+    form_class = TicketForm
 
 
     def get_context_data(self, **kwargs):
@@ -50,8 +52,26 @@ class CajaView(TemplateView):
             context["mesas"] = Mesa.objects.all()
             context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
             context['valor_total'] = sum([comanda.producto.precio for comanda in context['comandas']])
+            context['ticket_form'] = TicketForm()
+            
 
             return context
         context = super().get_context_data(**kwargs)
         context["mesas"] = Mesa.objects.all()
         return context
+    
+    def form_valid(self, form):
+        ticket_form = TicketForm(self.request.POST)
+
+        if ticket_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.save()
+            messages.success(self.request, "Ticket creado con éxito.")
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, 'Error al crear el ticket')
+            return self.form_invalid(form)
+        
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error al crear el ticket')
+        return self.render_to_response(self.get_context_data(form=form))
