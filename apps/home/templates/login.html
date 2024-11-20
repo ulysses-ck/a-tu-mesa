@@ -2,81 +2,96 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editar Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <style>
-        .split-screen {
-            display: flex;
-            height: 100vh;
-        }
-        .edit-panel {
-            width: 40%;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        .preview-panel {
-            width: 60%;
-            height: 100vh;
-            border: none;
-        }
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            background-color: #f8f9fa;
-            padding: 10px 0;
-            z-index: 1000;
-        }
+      .split-screen {
+        display: flex;
+        height: 100vh;
+      }
+      .edit-panel {
+        width: 40%;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+      }
+      .preview-panel {
+        width: 60%;
+        height: 100vh;
+        border: none;
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        background-color: #f8f9fa;
+        padding: 10px 0;
+        z-index: 1000;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="split-screen">
-        <!-- Panel deform -->
-        <div class="edit-panel">
-            <div class="sticky-header">
-                <h3 class="mb-3">Bienvenido</h3>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    {% url 'login' as url_login %}
-                    <form method="post" action="{{ url_login }}?redirect_to={{ request.GET.redirect_to }}" id="editForm">
-                        {% csrf_token %}
-                        
-                        <div class="mb-3">
-                            <label class="form-label">UserName</label>
-                            <input type="text" name="username" class="form-control"
-                                placeholder="Ingrese nombre de Usuario">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="text" name="password" class="form-control"
-                                placeholder="Ingrese contraseña">
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Ingresar</button>
-                            <a href="/" class="btn btn-secondary">Volver al Inicio</a>
-                            <a href="/create" class="btn btn-primary">Registrarse</a>
-                        </div>
-                    </form>
-                        {% if message %}
-                            <div class="alert alert-danger mt-3">
-                                {% for message in messages%}
-                                    <p>{{message}}</p>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                </div>
-            </div>
+      <!-- Panel deform -->
+      <div class="edit-panel">
+        <div class="sticky-header">
+          <h3 class="mb-3">Bienvenido</h3>
         </div>
+        <div class="card">
+          <div class="card-body">
+            {% url 'login' as url_login %}
+            <form
+              method="post"
+              action="{{ url_login }}?redirect_to={{ request.GET.redirect_to }}"
+              id="editForm"
+            >
+              {% csrf_token %}
 
-        <!-- Panel de Vista Previa -->
-        <iframe src="/" class="preview-panel" id="previewFrame"></iframe>
+              <div class="mb-3">
+                <label class="form-label">UserName</label>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control"
+                  placeholder="Ingrese nombre de Usuario"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Ingrese contraseña"
+                />
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+                <a href="/create" class="btn btn-primary">Registrarse</a>
+              </div>
+            </form>
+            {% if message %}
+            <div class="alert alert-danger mt-3">
+              {% for message in messages%}
+              <p>{{message}}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Vista Previa -->
+      <iframe src="/" class="preview-panel" id="previewFrame"></iframe>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>
