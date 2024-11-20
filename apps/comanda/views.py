@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Comanda
 from common.mixins import LoginRequidMixinWithLoginURL
+from django.utils import timezone
 
 class ComandasView(LoginRequidMixinWithLoginURL ,TemplateView):
     name = 'comanda'
@@ -24,6 +25,11 @@ class CreateComandaView(LoginRequidMixinWithLoginURL, CreateView):
     ]
     template_name = 'comanda_create.html'
     success_url = '/comanda'
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['fecha'] = timezone.now()  # Asigna la fecha actual como valor predeterminado
+        return initial
 
 class UpdateComandaView(LoginRequidMixinWithLoginURL, UpdateView):
     model = Comanda

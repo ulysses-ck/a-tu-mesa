@@ -12,7 +12,30 @@ class MesaView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["mesas"] = Mesa.objects.all()
+        mesas = Mesa.objects.all()
+        mesas_estado = []
+        
+        for mesa in mesas:
+            comandas = Comanda.objects.filter(mesa=mesa)
+            
+            """recorro las mesas revisando si tienen comandas, si las tienen y estan para entregar,
+            si las tienen y estan en preparacion o si simplemente estan ocupadas"""
+            if not comandas.exists():
+                estado = "Libre"
+            elif comandas.filter(estado__nombre="Para Entregar").exists():
+                estado = "Para Entregar"
+            elif comandas.filter(estado__nombre="En Preparación").exists():
+                estado = "En Preparacion"
+            else:
+                estado = "Ocupada"
+            
+            "Cualquiera sea el resultado, esto se agrega a la lista de mesas a iterar"
+            
+            mesas_estado.append({
+                "mesa": mesa,
+                "estado": estado
+            })
+            context["mesas_estado"] = mesas_estado
         return context
 
 

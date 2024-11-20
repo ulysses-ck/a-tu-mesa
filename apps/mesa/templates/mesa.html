@@ -2,6 +2,36 @@
 {% block title_heading %}Mesas{% endblock %}
 
 {% block main %}
+<style>
+    .mesa-card{
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+</style>
+<div class="card">
+    <div class="container">
+        <h2>Mesas</h2>
+        <div class="row">
+            {% for item in mesas_estado %}
+            
+                <a href="">
+                    <div class="col-md-3">
+                        <div class="mesa-card">
+                            <h3>Mesa {{ item.mesa.nro_mesa }}</h3>
+                            <p>Estado: <strong>{{ item.estado }}</strong></p>
+                        </div>
+                    </div>
+                </a>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--
 <div class="container">
     <div 
     class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
@@ -36,5 +66,4 @@
                 </tbody>
             </table>
         </div>
-</div>
-{% endblock %}
+</div>-->
