@@ -1,36 +1,38 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, FormView
 from .models import Mesa
+from apps.ticket.models import Ticket
 from apps.comanda.models import Comanda
 from common.mixins import LoginRequidMixinWithLoginURL
 from .forms import TicketForm
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect, render
 
+
+def rev_comanda_estado(mesa):
+    comandas = Comanda.objects.filter(mesa=mesa)
+
+    """recorro las mesas revisando si tienen comandas, si las tienen y estan para entregar,
+    si las tienen y estan en preparacion o si simplemente estan ocupadas"""
+    if not comandas.exists():
+        estado = "Libre"
+    elif comandas.filter(estado__nombre="Para Entregar").exists():
+        estado = "Para Entregar"
+    elif comandas.filter(estado__nombre="En Preparación").exists():
+        estado = "En Preparacion"
+    else:
+        estado = "Ocupada"
+    return estado
 
 class MesaView(TemplateView):
     name = "mesa"
     template_name = "mesa.html"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         mesas = Mesa.objects.all()
         mesas_estado = []
-        
         for mesa in mesas:
-            comandas = Comanda.objects.filter(mesa=mesa)
-            
-            """recorro las mesas revisando si tienen comandas, si las tienen y estan para entregar,
-            si las tienen y estan en preparacion o si simplemente estan ocupadas"""
-            if not comandas.exists():
-                estado = "Libre"
-            elif comandas.filter(estado__nombre="Para Entregar").exists():
-                estado = "Para Entregar"
-            elif comandas.filter(estado__nombre="En Preparación").exists():
-                estado = "En Preparacion"
-            else:
-                estado = "Ocupada"
-            
+            estado = rev_comanda_estado(mesa)
             "Cualquiera sea el resultado, esto se agrega a la lista de mesas a iterar"
-            
             mesas_estado.append({
                 "mesa": mesa,
                 "estado": estado
@@ -98,3 +100,4 @@ class CajaView(FormView):
     def form_invalid(self, form):
         messages.error(self.request, 'Error al crear el ticket')
         return self.render_to_response(self.get_context_data(form=form))
+

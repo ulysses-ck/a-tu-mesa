@@ -28,7 +28,7 @@ class CreateComandaView(LoginRequidMixinWithLoginURL, CreateView):
     
     def get_initial(self):
         initial = super().get_initial()
-        initial['fecha'] = timezone.now()  # Asigna la fecha actual como valor predeterminado
+        initial['fecha'] = timezone.now()
         return initial
 
 class UpdateComandaView(LoginRequidMixinWithLoginURL, UpdateView):

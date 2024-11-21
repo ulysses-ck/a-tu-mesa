@@ -9,25 +9,57 @@
         border-radius: 5px;
         margin-bottom: 15px;
         text-align: center;
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+    }
+    .mesa-card:hover {
+        transform: scale(1.15);
+    }
+    .bg-red {
+        background-color: red;
+    }
+    .text-white {
+        color: white;
+    }
+    .bg-green {
+        background-color: green;
+    }
+    .bg-orange {
+        background-color: orange;
+    }
+    .bg-blue {
+        background-color: blue;
+    }
+    .text-black {
+        color: black;
     }
 </style>
 <div class="card">
     <div class="container">
         <h2>Mesas</h2>
-        <div class="row">
-            {% for item in mesas_estado %}
-            
-                <a href="">
-                    <div class="col-md-3">
-                        <div class="mesa-card">
-                            <h3>Mesa {{ item.mesa.nro_mesa }}</h3>
-                            <p>Estado: <strong>{{ item.estado }}</strong></p>
-                        </div>
+            <div class="row">
+                    {% for item in mesas_estado %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                        <a href="">
+                            <div class="mesa-card text-center rounded shadow">
+                                {%if item.estado == "Libre"%}
+                                    <div class="bg-green text-white p-3">
+                                {%elif item.estado == "Para Entregar"%}
+                                    <div class="bg-red text-white p-3">
+                                {%elif item.estado == "En Preparacion"%}
+                                    <div class="bg-blue text-white p-3">
+                                {%else%}
+                                    <div class="bg-orange text-black p-3">
+                                {%endif %}
+                                <h3>Mesa {{ item.mesa.nro_mesa }}</h3>
+                                <p>Estado: <strong>{{ item.estado }}</strong></p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            
-            {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+            </div>
     </div>
 </div>
 {% endblock %}

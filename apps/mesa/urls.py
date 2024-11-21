@@ -6,6 +6,5 @@ urlpatterns = [
     path('mesa/create/', views.CreateMesaView.as_view(), name='create_mesa'),
     path('mesa/update/<int:pk>/', views.UpdateMesaView.as_view(), name='update_mesa'),
     path('mesa/delete/<int:pk>/', views.DeleteMesaView.as_view(), name='delete_mesa'),
-
     path('caja', views.CajaView.as_view(), name='caja'),
 ]

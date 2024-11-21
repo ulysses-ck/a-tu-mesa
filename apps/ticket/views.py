@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Ticket
 from common.mixins import LoginRequidMixinWithLoginURL
+from django.utils import timezone
 
 
 class TicketView(LoginRequidMixinWithLoginURL, TemplateView):
@@ -22,6 +23,10 @@ class CreateTicketView(LoginRequidMixinWithLoginURL, CreateView):
     ]
     template_name = "ticket_create.html"
     success_url = "/ticket"
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['fecha'] = timezone.now()
+        return initial
 
 
 class UpdateTicketView(LoginRequidMixinWithLoginURL, UpdateView):
