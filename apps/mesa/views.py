@@ -78,6 +78,7 @@ class CajaView(FormView):
             context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
             context['valor_total'] = sum([comanda.producto.precio for comanda in context['comandas']])
             context['ticket_form'] = TicketForm()
+            context['mesa_seleccionada'] = mesa_seleccionada
             
 
             return context

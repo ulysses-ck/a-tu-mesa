@@ -17,20 +17,17 @@
   <div class="caja">
     <div>
       <h1>Mesas</h1>
+      {% for mesa in mesas %}
       <form method="get">
-        <label for="mesa">Seleccionar una mesa</label>
-        <select name="mesa" id="mesa" class="form-select">
-          {% for mesa in mesas %}
-          <option value="{{ mesa.id }}" 
-          {% if mesa.id == mesa_seleccionada %}selected{% endif %}>
-          Mesa {{ mesa.id }}
-          </option>
-  
-        {% endfor %}
-
-        </select>
-        <button type="submit" class="btn btn-primary mt-2">Seleccionar Mesa</button>
+        <input type="text"
+        hidden
+        name="mesa"
+        value="{{ mesa.id }}" 
+        id="{{ mesa.id }}"
+        />
+        <button type="submit" class="btn btn-primary mt-2">Mesa {{ mesa.id }}</button>
       </form>
+      {% endfor %}
     </div>
 
     <div>
