@@ -45,35 +45,23 @@
                         {% csrf_token %}
                         
                         <div class="mb-3">
-                            <label class="form-label">URL Banner Principal</label>
-                            <input type="text" name="banner" class="form-control preview-update" 
-                                value="{{ banner }}"
-                                data-preview-target="banner-preview"
-                                placeholder="Ingrese URL del banner">
+                            <label for="formFile" class="form-label">Banner Principal</label>
+                            <input class="form-control" type="file" id="banner" name="banner" value="{{ banner }}" accept="image/*">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">URL Botón Menú</label>
-                            <input type="text" name="botonmenu" class="form-control preview-update" 
-                                value="{{ botonmenu }}"
-                                data-preview-target="menu-preview"
-                                placeholder="Ingrese URL del botón menú">
+                            <label for="formFile" class="form-label">Botón Menú</label>
+                            <input class="form-control" type="file" id="botonmenu" name="botonmenu" value="{{ botonmenu }}" accept="image/*">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">URL Botón Reservación</label>
-                            <input type="text" name="botonreservacion" class="form-control preview-update" 
-                                value="{{ botonreservacion }}"
-                                data-preview-target="reservacion-preview"
-                                placeholder="Ingrese URL del botón reservación">
+                            <label for="formFile" class="form-label">Botón Reservación</label>
+                            <input class="form-control" type="file" id="botonreservacion" name="botonreservacion" value="{{ botonreservacion }}" accept="image/*">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">URL Botón Seguimiento de Pedido</label>
-                            <input type="text" name="botonseguimientodepedido" class="form-control preview-update" 
-                                value="{{ botonseguimientodepedido }}"
-                                data-preview-target="seguimiento-preview"
-                                placeholder="Ingrese URL del botón seguimiento">
+                            <label for="formFile" class="form-label">Botón Seguimiento de Pedido</label>
+                            <input class="form-control" type="file" id="botonseguimientodepedido" name="botonseguimientodepedido" value="{{ botonseguimientodepedido }}" accept="image/*">
                         </div>
 
                         <div class="d-grid gap-2">
