@@ -97,33 +97,37 @@ class CajaView(TemplateView):
     def post(self, request, *args, **kwargs):
         if 'crear_comanda' in request.POST:
             try:
-                # Print POST data for debugging
                 print("POST data:", request.POST)
+                producto_id = request.POST.get('producto')
                 
                 comanda_form = ComandaForm(request.POST)
                 if comanda_form.is_valid():
                     comanda = comanda_form.save(commit=False)
                     comanda.save()
-                    messages.success(request, "Comanda creada exitosamente")
+                    messages.success(
+                        request, 
+                        "Comanda creada exitosamente", 
+                        extra_tags=f'comanda producto_{producto_id}'
+                    )
                     return redirect(f"{reverse('caja')}?mesa={request.POST.get('mesa')}")
                 else:
-                    # Print form errors
                     print("Form errors:", comanda_form.errors)
                     for field, errors in comanda_form.errors.items():
                         for error in errors:
                             messages.error(
                                 request, 
-                                f"Error en el campo {field}: {error}"
+                                f"Error en el campo {field}: {error}",
+                                extra_tags=f'comanda producto_{producto_id}'
                             )
                     return self.render_to_response(
                         self.get_context_data(comanda_form=comanda_form)
                     )
             except Exception as e:
-                # Print exception details
                 print("Exception:", str(e))
                 messages.error(
                     request, 
-                    f"Error inesperado al crear comanda: {str(e)}"
+                    f"Error inesperado al crear comanda: {str(e)}",
+                    extra_tags=f'comanda producto_{producto_id}'
                 )
                 return self.render_to_response(self.get_context_data())
 
@@ -133,14 +137,15 @@ class CajaView(TemplateView):
                 if ticket_form.is_valid():
                     ticket = ticket_form.save(commit=False)
                     ticket.save()
-                    messages.success(request, "Ticket creado exitosamente")
+                    messages.success(request, "Ticket creado exitosamente", extra_tags='ticket')
                     return redirect('caja')
                 else:
                     for field, errors in ticket_form.errors.items():
                         for error in errors:
                             messages.error(
                                 request, 
-                                f"Error en el campo {field}: {error}"
+                                f"Error en el campo {field}: {error}",
+                                extra_tags='ticket'
                             )
                     return self.render_to_response(
                         self.get_context_data(ticket_form=ticket_form)
@@ -148,7 +153,8 @@ class CajaView(TemplateView):
             except Exception as e:
                 messages.error(
                     request, 
-                    f"Error inesperado al crear ticket: {str(e)}"
+                    f"Error inesperado al crear ticket: {str(e)}",
+                    extra_tags='ticket'
                 )
                 return self.render_to_response(self.get_context_data())
 
