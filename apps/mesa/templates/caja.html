@@ -18,6 +18,9 @@
     text-align: center;
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
+
+    width: 100%;
+    height: 100%;
   }
   .mesa-card:hover {
     transform: scale(1.15);
@@ -39,19 +42,28 @@
   }
   .text-black {
     color: black;
-}
+  }
+  
+  .mesas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
+
+  .mesa-card > button {
+    width: 100%;
+    height: 100%;
+  }
 </style>
 
+<div class="container">
   <div class="caja">
     <div class= "row">
       <div>
         <h1>Mesas</h1>
-          <div class= "row">
+          <div class="mesas">
                     {% for item in mesas_estado %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="mesa-card text-center rounded shadow">
-                    <div class = "mesa-card">
-                      <form method="get">
+                      <form class="mesa-card" method="get">
                         <input type="text"
                           hidden
                           name="mesa"
@@ -71,9 +83,6 @@
                                 <p>Estado: <strong>{{ item.estado }}</strong></p>
                                 </button>
                         </form>
-                      </div>
-                    </div>
-                  </div>
                 {% endfor %}
               </div>
             </div>
@@ -85,6 +94,7 @@
       <p>{{ comanda.producto }}</p>
       {% endfor %}
     </div>
+
     <div>
       <h1>Ticket</h1>
       <form method="POST">
@@ -103,6 +113,7 @@
         <p>Valor total: $ {{ valor_total }}</p>
       </div>
   </div>
+</div>
 </div>
 {% endblock %}
 
