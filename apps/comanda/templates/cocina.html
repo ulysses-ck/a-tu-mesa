@@ -8,22 +8,16 @@ Cocina
 <div class="container">
     <h2>Cocina</h2>
     {% for comanda in comandas %}
-    <tr>
-        <td>{{ comanda.id }}</td>
-        <td>{{ comanda.producto }}</td>
-        <td>{{ comanda.cantidad }}</td>
-        <td>{{ comanda.estado }}</td>
-        <td>{{ comanda.tipo_de_pedido }}</td>
-        <td>{{ comanda.ticket }}</td>
-        <td>{{ comanda.mesa }}</td>
-        <td>{{ comanda.fecha }}</td>
-        <td>
-            {% url 'update_comanda' comanda.id as url_update %}
-            <a href="{{ url_update }}" class="btn btn-info">Editar</a>
-            {% url 'delete_comanda' comanda.id as url_delete %}
-            <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
-        </td>
-    </tr>
+    <div>
+        <p>{{ comanda.id }}</p>
+        <p>{{ comanda.producto }}</p>
+        <p>{{ comanda.cantidad }}</p>
+        <p>{{ comanda.estado }}</p>
+        <p>{{ comanda.tipo_de_pedido }}</p>
+        <p>{{ comanda.ticket }}</p>
+        <p>{{ comanda.mesa }}</p>
+        <p>{{ comanda.fecha }}</p>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
