@@ -56,7 +56,6 @@ LOCAL_APPS = [
     'apps.promociones',
     'apps.rol',
     'apps.ticket',
-    'apps.tipoDePedido',
     'apps.usuario',
     'apps.tipoProducto',
     'apps.home'

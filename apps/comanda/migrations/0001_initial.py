@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         ('mesa', '0001_initial'),
         ('producto', '0001_initial'),
         ('ticket', '0001_initial'),
-        ('tipoDePedido', '0001_initial'),
+        ('tipoProducto', '0001_initial'),
     ]
 
     operations = [
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('id_mesa', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mesa.mesa')),
                 ('id_producto', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='producto.producto')),
                 ('id_ticket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ticket.ticket')),
-                ('id_tipo_de_pedido', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tipoDePedido.tipodepedido')),
+                ('id_tipo_de_pedido', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tipoProducto.tipoProducto')),
             ],
         ),
     ]

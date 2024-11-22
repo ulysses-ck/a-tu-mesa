@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
 from .models import Promociones, Condiciones
+from django.utils import timezone
 
 from common.mixins import LoginRequidMixinWithLoginURL
 
@@ -65,6 +66,11 @@ class CreateCondicionesView(CreateView):
     ]
     template_name = "condiciones_create.html"
     success_url = "/condiciones"
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['inicio'] = timezone.now()
+        return initial
 
 
 class UpdateCondicionesView(UpdateView):

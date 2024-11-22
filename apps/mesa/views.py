@@ -95,6 +95,7 @@ class CajaView(TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
+        mesa_id = self.request.GET.get("mesa")
         if 'crear_comanda' in request.POST:
             try:
                 print("POST data:", request.POST)
@@ -133,11 +134,14 @@ class CajaView(TemplateView):
 
         elif 'crear_ticket' in request.POST:
             try:
+                mesa = get_object_or_404(Mesa, id=mesa_id)
                 ticket_form = TicketForm(request.POST)
                 if ticket_form.is_valid():
                     ticket = ticket_form.save(commit=False)
+                    ticket.mesa = mesa
                     ticket.save()
                     messages.success(request, "Ticket creado exitosamente", extra_tags='ticket')
+                    Comanda.objects.filter(mesa=ticket.mesa).update(mesa=None)
                     return redirect('caja')
                 else:
                     for field, errors in ticket_form.errors.items():

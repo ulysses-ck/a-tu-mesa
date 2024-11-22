@@ -23,13 +23,16 @@ Administrador
     {% url 'producto_admin' as producto %}
     {% url 'rol' as rol %}
     {% url 'tipoProducto' as tipo_producto %}
-    {% url 'tipoDePedido' as tipo_pedido %}
     {% url 'forma_pago' as forma_pago %}
     {% url 'condiciones' as condiciones %}
     {% url 'ticket' as ticket %}
     {% url 'administracion' as administracion %}
+    {% url 'caja' as caja %}
+    {% url 'promociones' as promociones %}
 
+    <a class="text-success btn btn-primary" href="{{ caja }}">Caja</a>
     <a class="text-success btn btn-primary" href="{{ comanda }}">Comanda</a>
+    <a class="text-success btn btn-primary" href="{{ promociones }}">Promociones</a>
     <a class="text-success btn btn-primary" href="{{ condiciones }}">Condiciones</a>
     <a class="text-success btn btn-primary" href="{{ estado }}">Estado</a>
     <a class="text-success btn btn-primary" href="{{ factura }}">Factura</a>
@@ -40,9 +43,9 @@ Administrador
     <a class="text-success btn btn-primary" href="{{ producto }}">Producto</a>
     <a class="text-success btn btn-primary" href="{{ rol }}">Rol</a>
     <a class="text-success btn btn-primary" href="{{ tipo_producto }}">Tipo Producto</a>
-    <a class="text-success btn btn-primary" href="{{ tipo_pedido }}">Tipo Pedido</a>
     <a class="text-success btn btn-primary" href="{{ ticket }}">Ticket</a>
     <a class="text-success btn btn-primary" href="{{ administracion }}">Administración</a>
+    
     </nav>
 
     <main class="col-11">
