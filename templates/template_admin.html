@@ -5,9 +5,14 @@ Administrador
 {% endblock %}
 
 {% block content %}
-<div class="row row-cols-12">
+<style>
+    .w-fit {
+        width: fit-content;
+    }
+</style>
+<div class="d-flex">
     <nav
-    class="col-1 d-flex flex-column justify-content-start align-items-start p-4 bg-dark min-vh-100"
+    class="col-1 d-flex flex-column justify-content-start align-items-start p-4 bg-dark min-vh-100 gap-2 w-fit"
     >
     {% url 'comanda' as comanda %}
     {% url 'estado' as estado %}
@@ -24,20 +29,20 @@ Administrador
     {% url 'ticket' as ticket %}
     {% url 'administracion' as administracion %}
 
-    <a href="{{ comanda }}">Comanda</a>
-    <a href="{{ condiciones }}">Condiciones</a>
-    <a href="{{ estado }}">Estado</a>
-    <a href="{{ factura }}">Factura</a>
-    <a href="{{ forma_pago }}">Forma de Pago</a>
-    <a href="{{ mesa }}">Mesa</a>
-    <a href="{{ pago }}">Pago</a>
-    <a href="{{ persona }}">Persona</a>
-    <a href="{{ producto }}">Producto</a>
-    <a href="{{ rol }}">Rol</a>
-    <a href="{{ tipo_producto }}">Tipo Producto</a>
-    <a href="{{ tipo_pedido }}">Tipo Pedido</a>
-    <a href="{{ ticket }}">Ticket</a>
-    <a href="{{ administracion }}">Administración</a>
+    <a class="text-success btn btn-primary" href="{{ comanda }}">Comanda</a>
+    <a class="text-success btn btn-primary" href="{{ condiciones }}">Condiciones</a>
+    <a class="text-success btn btn-primary" href="{{ estado }}">Estado</a>
+    <a class="text-success btn btn-primary" href="{{ factura }}">Factura</a>
+    <a class="text-success btn btn-primary" href="{{ forma_pago }}">Forma de Pago</a>
+    <a class="text-success btn btn-primary" href="{{ mesa }}">Mesa</a>
+    <a class="text-success btn btn-primary" href="{{ pago }}">Pago</a>
+    <a class="text-success btn btn-primary" href="{{ persona }}">Persona</a>
+    <a class="text-success btn btn-primary" href="{{ producto }}">Producto</a>
+    <a class="text-success btn btn-primary" href="{{ rol }}">Rol</a>
+    <a class="text-success btn btn-primary" href="{{ tipo_producto }}">Tipo Producto</a>
+    <a class="text-success btn btn-primary" href="{{ tipo_pedido }}">Tipo Pedido</a>
+    <a class="text-success btn btn-primary" href="{{ ticket }}">Ticket</a>
+    <a class="text-success btn btn-primary" href="{{ administracion }}">Administración</a>
     </nav>
 
     <main class="col-11">
