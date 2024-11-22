@@ -22,4 +22,4 @@ class TicketForm(forms.ModelForm):
 class ComandaForm(forms.ModelForm):
     class Meta:
         model = Comanda
-        fields = ['producto', 'cantidad', 'tipo_de_pedido', 'estado', 'fecha']
+        fields = ['producto', 'cantidad', 'tipo_de_pedido', 'estado', 'fecha', "mesa"]

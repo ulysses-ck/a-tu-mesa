@@ -87,7 +87,7 @@ class CajaView(TemplateView):
         context["mesas"] = Mesa.objects.all()
         if mesa_seleccionada:
             context["productos"] = Producto.objects.all()
-            context['fecha'] = dateformat.format(timezone.now(), 'd/m/Y')
+            context['fecha'] = dateformat.format(timezone.now(), 'm/d/Y')
             context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
             context['valor_total'] = sum([comanda.producto.precio for comanda in context['comandas']])
             context['ticket_form'] = TicketForm()
@@ -96,26 +96,61 @@ class CajaView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'crear_comanda' in request.POST:
-            comanda_form = ComandaForm(request.POST)
-            if comanda_form.is_valid():
-                comanda = comanda_form.save(commit=False)
-                comanda.save()
-                messages.success(request, "Comanda creada exitosamente")
-                return redirect(f"{reverse('caja')}?mesa={request.POST.get('mesa')}")
-            else:
-                messages.error(request, "Error al crear comanda")
-                return self.render_to_response(self.get_context_data(comanda_form=comanda_form))
+            try:
+                # Print POST data for debugging
+                print("POST data:", request.POST)
+                
+                comanda_form = ComandaForm(request.POST)
+                if comanda_form.is_valid():
+                    comanda = comanda_form.save(commit=False)
+                    comanda.save()
+                    messages.success(request, "Comanda creada exitosamente")
+                    return redirect(f"{reverse('caja')}?mesa={request.POST.get('mesa')}")
+                else:
+                    # Print form errors
+                    print("Form errors:", comanda_form.errors)
+                    for field, errors in comanda_form.errors.items():
+                        for error in errors:
+                            messages.error(
+                                request, 
+                                f"Error en el campo {field}: {error}"
+                            )
+                    return self.render_to_response(
+                        self.get_context_data(comanda_form=comanda_form)
+                    )
+            except Exception as e:
+                # Print exception details
+                print("Exception:", str(e))
+                messages.error(
+                    request, 
+                    f"Error inesperado al crear comanda: {str(e)}"
+                )
+                return self.render_to_response(self.get_context_data())
 
         elif 'crear_ticket' in request.POST:
-            ticket_form = TicketForm(request.POST)
-            if ticket_form.is_valid():
-                ticket = ticket_form.save(commit=False)
-                ticket.save()
-                messages.success(request, "Ticket creado exitosamente")
-                return redirect('caja')
-            else:
-                messages.error(request, "Error en el formulario del ticket")
-                return self.render_to_response(self.get_context_data(ticket_form=ticket_form))
+            try:
+                ticket_form = TicketForm(request.POST)
+                if ticket_form.is_valid():
+                    ticket = ticket_form.save(commit=False)
+                    ticket.save()
+                    messages.success(request, "Ticket creado exitosamente")
+                    return redirect('caja')
+                else:
+                    for field, errors in ticket_form.errors.items():
+                        for error in errors:
+                            messages.error(
+                                request, 
+                                f"Error en el campo {field}: {error}"
+                            )
+                    return self.render_to_response(
+                        self.get_context_data(ticket_form=ticket_form)
+                    )
+            except Exception as e:
+                messages.error(
+                    request, 
+                    f"Error inesperado al crear ticket: {str(e)}"
+                )
+                return self.render_to_response(self.get_context_data())
 
         return self.render_to_response(self.get_context_data())
 
