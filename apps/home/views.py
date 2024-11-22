@@ -28,9 +28,9 @@ class HomeView(TemplateView):
             id=1,
             defaults={
                 "banner": "home/example.jpg",
-                "botonMenu": "home/example.jpg",
-                "botonReservation": "home/example.jpg",
-                "botonSeguimientoDePedido": "home/example.jpg",
+                "botonMenu": "home/example1.jpg",
+                "botonReservation": "home/example2.jpg",
+                "botonSeguimientoDePedido": "home/example3.jpg",
             },
         )
         if home_instance:
@@ -84,9 +84,9 @@ class HomeAbout(TemplateView):
             id=1,
             defaults={
                 "banner": "home/example.jpg",
-                "botonMenu": "home/example.jpg",
-                "botonReservation": "home/example.jpg",
-                "botonSeguimientoDePedido": "home/example.jpg",
+                "botonMenu": "home/example1.jpg",
+                "botonReservation": "home/example2.jpg",
+                "botonSeguimientoDePedido": "home/example3.jpg",
             },
         )
         if home_instance:
