@@ -5,19 +5,67 @@ Cocina
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Cocina</h2>
-    {% for comanda in comandas %}
-    <div>
-        <p>{{ comanda.id }}</p>
-        <p>{{ comanda.producto }}</p>
-        <p>{{ comanda.cantidad }}</p>
-        <p>{{ comanda.estado }}</p>
-        <p>{{ comanda.tipo_de_pedido }}</p>
-        <p>{{ comanda.ticket }}</p>
-        <p>{{ comanda.mesa }}</p>
-        <p>{{ comanda.fecha }}</p>
+<div class="container-fluid p-4 bg-dark min-vh-100">
+    <h2 class="mb-4 text-center text-white">Panel de Cocina</h2>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for comanda in comandas %}
+        <div class="col">
+            <div class="card h-100 border-3 {% if comanda.estado == 'pendiente' %}border-warning bg-white
+                      {% elif comanda.estado == 'en_preparacion' %}border-info bg-white
+                      {% elif comanda.estado == 'listo' %}border-success bg-white
+                      {% else %}border-secondary bg-white{% endif %}">
+                
+                <div class="card-header {% if comanda.estado == 'pendiente' %}bg-warning text-dark
+                                      {% elif comanda.estado == 'en_preparacion' %}bg-info text-white
+                                      {% elif comanda.estado == 'listo' %}bg-success text-white
+                                      {% else %}bg-secondary text-white{% endif %} d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Comanda #{{ comanda.id }}</h5>
+                    <span class="badge {% if comanda.tipo_de_pedido == 'salon' %}bg-primary
+                                     {% else %}bg-danger{% endif %}">
+                        {{ comanda.tipo_de_pedido|title }}
+                    </span>
+                </div>
+                
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <h4 class="text-dark fw-bold mb-3">{{ comanda.producto }}</h4>
+                        </div>
+                        
+                        <div class="col-6">
+                            <p class="mb-1 text-dark"><strong>Cantidad:</strong></p>
+                            <h3 class="text-danger fw-bold">{{ comanda.cantidad }}</h3>
+                        </div>
+                        
+                        <div class="col-6">
+                            <p class="mb-1 text-dark"><strong>Estado:</strong></p>
+                            <span class="badge {% if comanda.estado == 'pendiente' %}bg-warning text-dark
+                                           {% elif comanda.estado == 'en_preparacion' %}bg-info text-white
+                                           {% elif comanda.estado == 'listo' %}bg-success text-white
+                                           {% else %}bg-secondary text-white{% endif %} fs-6">
+                                {{ comanda.estado|title }}
+                            </span>
+                        </div>
+                        
+                        <div class="col-6">
+                            <p class="mb-1 text-dark"><strong>Mesa:</strong></p>
+                            <p class="fs-5 text-dark fw-bold">{{ comanda.mesa }}</p>
+                        </div>
+                        
+                        <div class="col-6">
+                            <p class="mb-1 text-dark"><strong>Ticket:</strong></p>
+                            <p class="fs-5 text-dark fw-bold">#{{ comanda.ticket }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-dark text-white">
+                    <small>{{ comanda.fecha }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}
