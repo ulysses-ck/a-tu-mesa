@@ -7,27 +7,76 @@
   .caja {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     background-color: #fff;
     color: #444;
   }
+  .mesa-card{
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  .mesa-card:hover {
+    transform: scale(1.15);
+  }
+  .bg-red {
+    background-color: red;
+  }
+  .text-white {
+    color: white;
+  }
+  .bg-green {
+    background-color: green;
+  }
+  .bg-orange {
+    background-color: orange;
+  }
+  .bg-blue {
+    background-color: blue;
+  }
+  .text-black {
+    color: black;
+}
 </style>
 
-<div class="container">
   <div class="caja">
-    <div>
-      <h1>Mesas</h1>
-      {% for mesa in mesas %}
-      <form method="get">
-        <input type="text"
-        hidden
-        name="mesa"
-        value="{{ mesa.id }}" 
-        id="{{ mesa.id }}"
-        />
-        <button type="submit" class="btn btn-primary mt-2">Mesa {{ mesa.id }}</button>
-      </form>
-      {% endfor %}
+    <div class= "row">
+      <div>
+        <h1>Mesas</h1>
+          <div class= "row">
+                    {% for item in mesas_estado %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="mesa-card text-center rounded shadow">
+                    <div class = "mesa-card">
+                      <form method="get">
+                        <input type="text"
+                          hidden
+                          name="mesa"
+                          value="{{ item.mesa.id }}" 
+                          id="{{ item.mesa.id }}"
+                        />
+                                {%if item.estado == "Libre"%}
+                                    <button type="submit" class="bg-green text-white p-3">
+                                {%elif item.estado == "Para Entregar"%}
+                                    <button type="submit" class="bg-red text-white p-3">
+                                {%elif item.estado == "En Preparacion"%}
+                                    <button type="submit" class="bg-blue text-white p-3">
+                                {%else%}
+                                  <button type="submit" class="bg-orange text-black p-3">
+                                {%endif %}
+                                <h3>Mesa {{ item.mesa.nro_mesa }}</h3>
+                                <p>Estado: <strong>{{ item.estado }}</strong></p>
+                                </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
     </div>
 
     <div>
@@ -51,8 +100,23 @@
         {% endfor %}
         <button type="submit" class="btn btn-primary">Generar ticket</button>
       </form>
-      <p>Valor total: $ {{ valor_total }}</p>
-    </div>
+        <p>Valor total: $ {{ valor_total }}</p>
+      </div>
   </div>
 </div>
 {% endblock %}
+
+<!--<div>
+  <h1>Mesas</h1>
+  {% for mesa in mesas %}
+  <form method="get">
+    <input type="text"
+    hidden
+    name="mesa"
+    value="{{ mesa.id }}" 
+    id="{{ mesa.id }}"
+    />
+    <button type="submit" class="btn btn-primary mt-2">Mesa {{ mesa.id }}</button>
+  </form>
+  {% endfor %}
+</div>-->

@@ -72,18 +72,24 @@ class CajaView(FormView):
 
     def get_context_data(self, **kwargs):
         mesa_seleccionada = self.request.GET.get("mesa")
+        context = super().get_context_data(**kwargs)
+        mesas = Mesa.objects.all()
+        mesas_estado = []
+        for mesa in mesas:
+            estado = rev_comanda_estado(mesa)
+            "Cualquiera sea el resultado, esto se agrega a la lista de mesas a iterar"
+            mesas_estado.append({
+                "mesa": mesa,
+                "estado": estado
+            })
+        context["mesas_estado"] = mesas_estado
+        context["mesas"] = Mesa.objects.all()
         if mesa_seleccionada:
-            context = super().get_context_data(**kwargs)
-            context["mesas"] = Mesa.objects.all()
             context['comandas'] = Comanda.objects.filter(mesa__nro_mesa=mesa_seleccionada)
             context['valor_total'] = sum([comanda.producto.precio for comanda in context['comandas']])
             context['ticket_form'] = TicketForm()
             context['mesa_seleccionada'] = mesa_seleccionada
-            
-
             return context
-        context = super().get_context_data(**kwargs)
-        context["mesas"] = Mesa.objects.all()
         return context
     
     def form_valid(self, form):
