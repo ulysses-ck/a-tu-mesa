@@ -58,6 +58,18 @@
   .container, .container div {
     background-color: #F1F8FF;
   }
+
+  .comandas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  .comanda {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 </style>
 
 <div class="container">
@@ -91,12 +103,28 @@
               </div>
             </div>
     </div>
-
     <div>
       <h1>Comandas</h1>
-      {% for comanda in comandas %}
-      <p>{{ comanda.producto }}</p>
-      {% endfor %}
+      <div class="comandas">
+        {% for comanda in comandas %}
+        <div class="comanda bg-primary p-3">
+          <div class="d-flex justify-content-center align-items-center bg-primary">
+            {% if comanda.producto.imagen %}
+              <div class="align-items-center image-container justify-content-center d-flex" style="width: 80px; height: 80px;">
+                <img class="mx-auto card-img-top img-fluid img"  src="{{ comanda.producto.imagen.url }}" />
+              </div>
+            {% else %}
+              <p class="text-center bg-primary">No hay imagen</p>
+            {% endif %}                            
+          </div>
+          <div class="d-flex flex-column justify-content-start bg-primary">
+            <p class="bg-primary fw-bold">{{ comanda.producto.nombre }}</p>
+            <p class="bg-primary">{{ comanda.cantidad }}</p>
+            <p class="bg-primary">$ {{ comanda.producto.precio }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
 
     <div>
