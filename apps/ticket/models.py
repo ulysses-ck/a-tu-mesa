@@ -9,4 +9,7 @@ class Ticket (models.Model):
 	notas = models.CharField(max_length=120)
 
 	def __str__(self):
-		return f"Ticket {self.id} - Mesa {self.mesa.nro_mesa} ({self.estado})"
+		if self.mesa:
+			return f"Ticket {self.id} - Mesa {self.mesa.nro_mesa} ({self.estado})"
+		else:
+			return f"Ticket {self.id} - Sin mesa ({self.estado})"
