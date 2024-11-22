@@ -45,9 +45,11 @@
         <div class="card">
           <div class="card-body">
             {% url 'login' as url_login %}
+            {% if request.GET.redirect_to %}
+            {% with redirect_to=request.GET.redirect_to %}
             <form
               method="post"
-              action="{{ url_login }}?redirect_to={{ request.GET.redirect_to }}"
+              action="{{ url_login }}?redirect_to={{ redirect_to }}"
               id="editForm"
             >
               {% csrf_token %}
@@ -77,6 +79,41 @@
                 <a href="/create" class="btn btn-primary">Registrarse</a>
               </div>
             </form>
+            {% endwith %}
+            {% else %}
+            <form
+            method="post"
+            action="{{ url_login }}"
+            id="editForm"
+          >
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label">UserName</label>
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Ingrese nombre de Usuario"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Ingrese contraseña"
+              />
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+              <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+              <a href="/create" class="btn btn-primary">Registrarse</a>
+            </div>
+          </form>
+            {% endif %}
             {% if message %}
             <div class="alert alert-danger mt-3">
               {% for message in messages%}
