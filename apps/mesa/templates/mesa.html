@@ -2,68 +2,7 @@
 {% block title_heading %}Mesas{% endblock %}
 
 {% block main %}
-<style>
-    .mesa-card{
-        border: 1px solid #ccc;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        text-align: center;
-        transition: transform 0.2s ease-in-out;
-        cursor: pointer;
-    }
-    .mesa-card:hover {
-        transform: scale(1.15);
-    }
-    .bg-red {
-        background-color: red;
-    }
-    .text-white {
-        color: white;
-    }
-    .bg-green {
-        background-color: green;
-    }
-    .bg-orange {
-        background-color: orange;
-    }
-    .bg-blue {
-        background-color: blue;
-    }
-    .text-black {
-        color: black;
-    }
-</style>
-<div class="card">
-    <div class="container">
-        <h2>Mesas</h2>
-            <div class="row">
-                    {% for item in mesas_estado %}
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                        <a href="">
-                            <div class="mesa-card text-center rounded shadow">
-                                {%if item.estado == "Libre"%}
-                                    <div class="bg-green text-white p-3">
-                                {%elif item.estado == "Para Entregar"%}
-                                    <div class="bg-red text-white p-3">
-                                {%elif item.estado == "En Preparacion"%}
-                                    <div class="bg-blue text-white p-3">
-                                {%else%}
-                                    <div class="bg-orange text-black p-3">
-                                {%endif %}
-                                <h3>Mesa {{ item.mesa.nro_mesa }}</h3>
-                                <p>Estado: <strong>{{ item.estado }}</strong></p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-    </div>
-</div>
-{% endblock %}
-<!--
+
 <div class="container">
     <div 
     class="d-flex justify-content-between mb-4 mt-4 items-center w-full"
@@ -83,14 +22,14 @@
 </tr>
                 </thead>
                 <tbody>
-                    {% for mesa in mesas %}
+                    {% for mesa in mesas_estado %}
                     <tr>
-                        <td>{{ mesa.id }}</td>
-                        <td>{{ mesa.nro_mesa }}</td>
+                        <td>{{ mesa.mesa.id }}</td>
+                        <td>{{ mesa.mesa.nro_mesa }}</td>
                         <td>
-                            {% url 'update_mesa' mesa.id as url_update %}
+                            {% url 'update_mesa' mesa.mesa.id as url_update %}
                             <a href="{{ url_update }}" class="btn btn-info">Editar</a>
-                            {% url 'delete_mesa' mesa.id as url_delete %}
+                            {% url 'delete_mesa' mesa.mesa.id as url_delete %}
                             <a href="{{ url_delete }}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
@@ -98,4 +37,7 @@
                 </tbody>
             </table>
         </div>
-</div>-->
+</div>
+
+{% endblock %}
+
