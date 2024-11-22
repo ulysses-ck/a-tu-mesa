@@ -125,12 +125,79 @@
         </div>
         {% endfor %}
       </div>
-    </div>
 
+      <h3>Agregar comanda</h3>
+
+     {% if mesa_seleccionada %}
+      <!-- agregar comanda -->
+      {% for producto in productos %}
+      <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="crear_comanda" value="1">
+        
+        <!-- Producto -->
+        <input type="hidden" name="producto" value="{{ producto.id }}">
+        
+        <!-- Mesa -->
+        <input type="hidden" name="mesa" value="{{ mesa_seleccionada.id }}">
+        
+        <!-- Display producto info -->
+        {% if producto.imagen %}
+          <div class="align-items-center image-container justify-content-center d-flex" style="width: 80px; height: 80px;">
+            <img class="mx-auto card-img-top img-fluid img" src="{{ producto.imagen.url }}" />
+          </div>
+        {% else %}
+          <p class="text-center bg-primary">No hay imagen</p>
+        {% endif %}
+        
+        <div class="producto-info">
+          <p>{{ producto.nombre }}</p>
+          <p>$ {{ producto.precio }}</p>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="form-group">
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" 
+                 name="cantidad" 
+                 id="cantidad" 
+                 value="1" 
+                 min="1" 
+                 class="form-control"
+                 required>
+        </div>
+
+        <!-- Estado - assuming estado.id 1 is the default initial state -->
+        <input type="hidden" name="estado" value="1">
+        
+        <!-- Tipo de pedido - assuming tipo_de_pedido.id 1 is the default -->
+        <input type="hidden" name="tipo_de_pedido" value="1">
+        
+        <!-- Fecha -->
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+        
+        <!-- Ticket initially null -->
+        <input type="hidden" name="ticket" value="">
+
+        <button type="submit" class="btn btn-primary mt-2">
+          <span>Agregar {{ producto.nombre }}</span>
+        </button>
+
+
+        {% if messages %}
+          {% for message in messages %}
+            <p class="text-danger">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      </form>
+      {% endfor %}
+    {% endif %}
+    </div>
     <div>
       <h1>Ticket</h1>
       <form method="POST">
         {% csrf_token %}
+        <input type="hidden" name="crear_ticket" value="1">
         <!-- form -->
         {% for field in ticket_form %}
         <div class="form-group">

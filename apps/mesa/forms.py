@@ -2,7 +2,7 @@ from django import forms
 
 from apps.ticket.models import Ticket
 from apps.promociones.models import Promociones
-
+from apps.comanda.models import Comanda
 class TicketForm(forms.ModelForm):
     promocion = forms.ModelChoiceField(
         queryset=Promociones.objects.all(),
@@ -19,4 +19,7 @@ class TicketForm(forms.ModelForm):
 
 
 
-      
+class ComandaForm(forms.ModelForm):
+    class Meta:
+        model = Comanda
+        fields = ['producto', 'cantidad', 'tipo_de_pedido', 'estado', 'fecha']
