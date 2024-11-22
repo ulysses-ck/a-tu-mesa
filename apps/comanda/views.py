@@ -49,3 +49,11 @@ class DeleteComandaView(LoginRequidMixinWithLoginURL, DeleteView):
     model = Comanda
     template_name = 'comanda_delete.html'
     success_url = '/comanda'
+
+class CocinaView(TemplateView):
+    template_name = 'cocina.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comandas'] = Comanda.objects.all()
+        return context
