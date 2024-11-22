@@ -1,7 +1,10 @@
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
 from .models import Comanda
+from apps.estado.models import Estado
 from common.mixins import LoginRequidMixinWithLoginURL
 from django.utils import timezone
+from django.contrib import messages
 
 class ComandasView(LoginRequidMixinWithLoginURL ,TemplateView):
     name = 'comanda'
@@ -56,4 +59,30 @@ class CocinaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comandas'] = Comanda.objects.all()
+        context['estados'] = Estado.objects.all()
         return context
+    
+    def post(self, request, *args, **kwargs):
+        comanda_id = request.POST.get('comanda_id')
+        nuevo_estado_id = request.POST.get('estado_id')
+        
+        if not comanda_id or not nuevo_estado_id:
+            messages.error(request, 'Datos incompletos para actualizar el estado')
+            return redirect('cocina')
+        
+        try:
+            comanda = Comanda.objects.get(id=comanda_id)
+            estado = Estado.objects.get(id=nuevo_estado_id)
+            
+            comanda.estado = estado
+            comanda.save()
+            messages.success(request, f'Estado de comanda #{comanda_id} actualizado a {estado.nombre}')
+            
+        except Comanda.DoesNotExist:
+            messages.error(request, f'No se encontró la comanda #{comanda_id}')
+        except Estado.DoesNotExist:
+            messages.error(request, f'Estado inválido')
+        except Exception as e:
+            messages.error(request, f'Error al actualizar el estado: {str(e)}')
+            
+        return redirect('cocina')

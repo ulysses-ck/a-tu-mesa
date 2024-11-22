@@ -63,6 +63,21 @@ Cocina
                 <div class="card-footer bg-dark text-white">
                     <small>{{ comanda.fecha }}</small>
                 </div>
+
+                <div class="card-footer bg-light p-2">
+                    <div class="d-flex flex-wrap gap-2 justify-content-center">
+                        {% for estado in estados %}
+                        <form method="POST" class="m-0">
+                            {% csrf_token %}
+                            <input type="hidden" name="comanda_id" value="{{ comanda.id }}">
+                            <input type="hidden" name="estado_id" value="{{ estado.id }}">
+                            <button type="submit" class="btn {% if comanda.estado.id == estado.id %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                                {{ estado.nombre }}
+                            </button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
